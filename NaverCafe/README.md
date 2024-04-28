@@ -6,4 +6,9 @@
 <br/><br/>
 
 ## ERD
-![NaverCafe_ERD](imageFiles/NaverCafe_ERD.png)
+![NaverCafe_ERD](imageFiles/NaverCafe_ERD.png)  
+<br/><br/>
+
+## 스펙 구현
+기능 구현에 대한 내용을 개인 블로그에 포스팅 해두었다. 항목 클릭 시 해당 포스팅으로 이동된다.
+1. [네이버 회원](https://development-diary-for-me.tistory.com/4)
