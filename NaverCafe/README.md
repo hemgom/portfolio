@@ -15,5 +15,5 @@
 
 ## 구현 스펙
 기능 구현에 대한 내용을 개인 블로그에 포스팅 해두었다. 항목 클릭 시 해당 포스팅으로 이동된다.
-1. [네이버 회원](https://development-diary-for-me.tistory.com/4)
-   - 회원 가입(=등록)
+1. [네이버 회원 가입(등록)](https://development-diary-for-me.tistory.com/4)
+2. [예외 처리](https://development-diary-for-me.tistory.com/5)
