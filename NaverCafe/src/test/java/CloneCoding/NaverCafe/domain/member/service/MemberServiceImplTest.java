@@ -25,14 +25,14 @@ class MemberServiceImplTest {
     void joinMember() {
         // given
         LocalDate birthday = LocalDate.of(2000, 2, 20);
-        Member member = new Member(1L,"java", "0000",
+        Member member = new Member(1L, "java", "0000",
                 "testEmail@test.com", "Kim",
                 birthday, "01055558888", "intellij");
 
         // when
         Member joinMember = memberRepository.save(member);
         Member findMember = memberRepository.findById(1L)
-                .orElseThrow(()-> new NoSuchElementException("id와 일치하는 회원이 없습니다."));
+                .orElseThrow(() -> new NoSuchElementException("id와 일치하는 회원이 없습니다."));
 
         // then
         assertThat(findMember).isEqualTo(joinMember);

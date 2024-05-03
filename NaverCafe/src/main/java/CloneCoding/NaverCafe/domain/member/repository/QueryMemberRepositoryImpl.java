@@ -2,6 +2,7 @@ package CloneCoding.NaverCafe.domain.member.repository;
 
 import CloneCoding.NaverCafe.domain.member.Member;
 import CloneCoding.NaverCafe.domain.member.dto.RequestJoinMember;
+import CloneCoding.NaverCafe.domain.member.dto.ResponseMemberInfo;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -26,6 +27,18 @@ public class QueryMemberRepositoryImpl implements QueryMemberRepository {
                 .birthday(birth)
                 .phoneNumber(request.getPhoneNumber())
                 .nickname(request.getNickname())
+                .build();
+    }
+
+    @Override
+    public ResponseMemberInfo makeResponseMemberInfo(Member member) {
+        return ResponseMemberInfo.builder()
+                .accountId(member.getAccountId())
+                .email(member.getEmail())
+                .username(member.getUsername())
+                .birthday(member.getBirthday())
+                .phoneNumber(member.getPhoneNumber())
+                .nickname(member.getNickname())
                 .build();
     }
 

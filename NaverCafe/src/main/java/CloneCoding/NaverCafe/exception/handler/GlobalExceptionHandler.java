@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Slf4j
 @RestControllerAdvice
@@ -22,22 +23,17 @@ public class GlobalExceptionHandler {
         return handleExceptionInternal(e, errorCode);
     }
 
+    @ExceptionHandler(NoSuchElementException.class)
+    public ResponseEntity<Object> handleNoSuchElementException(NoSuchElementException e) {
+        ErrorCode errorCode = CommonErrorCode.RESOURCE_NOT_FOUND;
+        return handleExceptionInternal(errorCode, e.getMessage());
+    }
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Object> handleAllException(Exception e) {
         log.warn("handleAllException : ", e);
         ErrorCode errorCode = CommonErrorCode.INTERNAL_SERVER_ERROR;
         return handleExceptionInternal(errorCode);
-    }
-
-    private ResponseEntity<Object> handleExceptionInternal(ErrorCode errorCode) {
-        return ResponseEntity.status(errorCode.getHttpStatus())
-                .body(makeResponseError(errorCode));
-    }
-
-    private ResponseError makeResponseError(ErrorCode errorCode) {
-        return ResponseError.builder()
-                .code(errorCode.name())
-                .build();
     }
 
     private ResponseEntity<Object> handleExceptionInternal(BindException e, ErrorCode errorCode) {
@@ -56,6 +52,29 @@ public class GlobalExceptionHandler {
                 .code(errorCode.name())
                 .message(errorCode.getMessage())
                 .errors(validationErrors)
+                .build();
+    }
+
+    private ResponseEntity<Object> handleExceptionInternal(ErrorCode errorCode) {
+        return ResponseEntity.status(errorCode.getHttpStatus())
+                .body(makeResponseError(errorCode));
+    }
+
+    private ResponseError makeResponseError(ErrorCode errorCode) {
+        return ResponseError.builder()
+                .code(errorCode.name())
+                .build();
+    }
+
+    private ResponseEntity<Object> handleExceptionInternal(ErrorCode errorCode, String message) {
+        return ResponseEntity.status(errorCode.getHttpStatus())
+                .body(makeResponseError(errorCode, message));
+    }
+
+    private ResponseError makeResponseError(ErrorCode errorCode, String message) {
+        return ResponseError.builder()
+                .code(errorCode.name())
+                .message(message)
                 .build();
     }
 
