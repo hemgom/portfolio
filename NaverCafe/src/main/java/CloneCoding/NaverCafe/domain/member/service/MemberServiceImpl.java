@@ -3,6 +3,7 @@ package CloneCoding.NaverCafe.domain.member.service;
 import CloneCoding.NaverCafe.domain.member.Member;
 import CloneCoding.NaverCafe.domain.member.dto.RequestJoinMember;
 import CloneCoding.NaverCafe.domain.member.dto.RequestLogin;
+import CloneCoding.NaverCafe.domain.member.dto.ResponseLogin;
 import CloneCoding.NaverCafe.domain.member.dto.ResponseMemberInfo;
 import CloneCoding.NaverCafe.domain.member.repository.MemberRepository;
 import CloneCoding.NaverCafe.message.SystemMessage;
@@ -44,14 +45,15 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public String login(RequestLogin request) {
+    public ResponseLogin login(RequestLogin request) {
 
         Member findMember = memberRepository.findByAccount(request);
         findMember.setLoginStatus(STATUS_LOGIN.getStatus());
-        findMember.setToken(aesUtil.aesEncode(findMember.getAccountId()));
         memberRepository.save(findMember);
 
-        return SystemMessage.LOGIN_COMPLETE.getMessage();
+        String token = aesUtil.aesEncode(findMember.getAccountId());
+
+        return new ResponseLogin(token);
 
     }
 

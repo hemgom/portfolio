@@ -8,8 +8,7 @@ import lombok.RequiredArgsConstructor;
 public enum Login {
 
     STATUS_LOGIN("login"),
-    STATUS_LOGOUT("logout"),
-    EMPTY_TOKEN("empty")
+    STATUS_LOGOUT("logout")
     ;
 
     private final String status;

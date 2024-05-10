@@ -33,7 +33,7 @@ class MemberServiceImplTest {
         Member member = new Member
                 (1L, "java", "0000",
                 "testEmail@test.com", "Kim",
-                birthday, "01055558888", "intellij", Login.STATUS_LOGOUT.getStatus(), "empty");
+                birthday, "01055558888", "intellij", Login.STATUS_LOGOUT.getStatus());
 
         // when
         Member joinMember = memberRepository.save(member);

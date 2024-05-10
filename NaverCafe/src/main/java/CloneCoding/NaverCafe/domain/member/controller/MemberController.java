@@ -2,6 +2,7 @@ package CloneCoding.NaverCafe.domain.member.controller;
 
 import CloneCoding.NaverCafe.domain.member.dto.RequestJoinMember;
 import CloneCoding.NaverCafe.domain.member.dto.RequestLogin;
+import CloneCoding.NaverCafe.domain.member.dto.ResponseLogin;
 import CloneCoding.NaverCafe.domain.member.dto.ResponseMemberInfo;
 import CloneCoding.NaverCafe.domain.member.service.MemberService;
 import jakarta.validation.Valid;
@@ -30,7 +31,7 @@ public class MemberController {
     }
 
     @PostMapping("/login")
-    public String login(@RequestBody RequestLogin request) {
+    public ResponseLogin login(@RequestBody RequestLogin request) {
         log.info("로그인 요청");
         return memberService.login(request);
     }
