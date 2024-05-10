@@ -1,6 +1,7 @@
 package CloneCoding.NaverCafe.domain.member.controller;
 
 import CloneCoding.NaverCafe.domain.member.dto.RequestJoinMember;
+import CloneCoding.NaverCafe.domain.member.dto.RequestLogin;
 import CloneCoding.NaverCafe.domain.member.dto.ResponseMemberInfo;
 import CloneCoding.NaverCafe.domain.member.service.MemberService;
 import jakarta.validation.Valid;
@@ -26,6 +27,12 @@ public class MemberController {
     public ResponseMemberInfo readMemberInfo(@PathVariable("id") Long id) {
         log.info("회원 정보 요청");
         return memberService.findMemberInfoById(id);
+    }
+
+    @PostMapping("/login")
+    public String login(@RequestBody RequestLogin request) {
+        log.info("로그인 요청");
+        return memberService.login(request);
     }
 
 }

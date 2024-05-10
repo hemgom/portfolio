@@ -2,6 +2,8 @@ package CloneCoding.NaverCafe.domain.member.service;
 
 import CloneCoding.NaverCafe.domain.member.Member;
 import CloneCoding.NaverCafe.domain.member.repository.MemberRepository;
+import CloneCoding.NaverCafe.message.Login;
+import CloneCoding.NaverCafe.security.AesUtil;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,14 +22,18 @@ class MemberServiceImplTest {
     @Autowired
     MemberRepository memberRepository;
 
+    @Autowired
+    AesUtil aesUtil;
+
     @DisplayName("회원가입 테스트")
     @Test
     void joinMember() {
         // given
         LocalDate birthday = LocalDate.of(2000, 2, 20);
-        Member member = new Member(1L, "java", "0000",
+        Member member = new Member
+                (1L, "java", "0000",
                 "testEmail@test.com", "Kim",
-                birthday, "01055558888", "intellij");
+                birthday, "01055558888", "intellij", Login.STATUS_LOGOUT.getStatus(), "empty");
 
         // when
         Member joinMember = memberRepository.save(member);
@@ -36,6 +42,24 @@ class MemberServiceImplTest {
 
         // then
         assertThat(findMember).isEqualTo(joinMember);
+    }
+    
+    @DisplayName("암호화 복호화 테스트")
+    @Test
+    void AesUtilTest() {
+        // given
+        String accountId = "springboot";
+
+        // when
+        String encodeData = aesUtil.aesEncode(accountId);
+        String decodeData = aesUtil.aesDecode(encodeData);
+
+        // then
+        System.out.println("inputData : " + accountId);
+        System.out.println("encodeData : " + encodeData);
+        System.out.println("decodeData : " + decodeData);
+        assertThat(accountId).isEqualTo(decodeData);
+
     }
 
 }

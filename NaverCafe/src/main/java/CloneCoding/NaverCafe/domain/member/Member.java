@@ -1,9 +1,12 @@
 package CloneCoding.NaverCafe.domain.member;
 
+import CloneCoding.NaverCafe.message.Login;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+
+import static CloneCoding.NaverCafe.message.Login.*;
 
 @Entity
 @Table(name = "MEMBER")
@@ -37,5 +40,21 @@ public class Member {
 
     @Column(name = "NICKNAME", unique = true)
     private String nickname;
+
+    @Column(name = "STATUS")
+    @Builder.Default
+    private String status = STATUS_LOGOUT.getStatus();
+
+    @Column(name = "TOKEN")
+    @Builder.Default
+    private String token = EMPTY_TOKEN.getStatus();
+
+    public void setLoginStatus(String status) {
+        this.status = status;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
 
 }
