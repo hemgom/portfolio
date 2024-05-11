@@ -36,4 +36,10 @@ public class MemberController {
         return memberService.login(request);
     }
 
+    @PutMapping("/logout/{token}")
+    public String logout(@PathVariable("token") String token) {
+        log.info("로그아웃 요청");
+        return memberService.logout(token);
+    }
+
 }

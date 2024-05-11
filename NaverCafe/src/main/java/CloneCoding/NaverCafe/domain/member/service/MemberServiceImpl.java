@@ -6,7 +6,6 @@ import CloneCoding.NaverCafe.domain.member.dto.RequestLogin;
 import CloneCoding.NaverCafe.domain.member.dto.ResponseLogin;
 import CloneCoding.NaverCafe.domain.member.dto.ResponseMemberInfo;
 import CloneCoding.NaverCafe.domain.member.repository.MemberRepository;
-import CloneCoding.NaverCafe.message.SystemMessage;
 import CloneCoding.NaverCafe.security.AesUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,7 +13,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.NoSuchElementException;
 
-import static CloneCoding.NaverCafe.message.Login.STATUS_LOGIN;
+import static CloneCoding.NaverCafe.message.SystemMessage.JOIN_COMPLETE_NAVER;
+import static CloneCoding.NaverCafe.message.SystemMessage.LOGOUT_COMPLETE;
+import static CloneCoding.NaverCafe.security.LoginStatus.STATUS_LOGIN;
+import static CloneCoding.NaverCafe.security.LoginStatus.STATUS_LOGOUT;
 
 @Service
 @Transactional
@@ -30,7 +32,7 @@ public class MemberServiceImpl implements MemberService {
         Member joinMember = memberRepository.join(request);
         memberRepository.save(joinMember);
 
-        return SystemMessage.JOIN_COMPLETE_NAVER.getMessage();
+        return JOIN_COMPLETE_NAVER.getMessage();
 
     }
 
@@ -54,6 +56,19 @@ public class MemberServiceImpl implements MemberService {
         String token = aesUtil.aesEncode(findMember.getAccountId());
 
         return new ResponseLogin(token);
+
+    }
+
+    @Override
+    public String logout(String token) {
+
+        String accountId = aesUtil.aesDecode(token);
+
+        Member findMember = memberRepository.findByAccountId(accountId);
+        findMember.setLoginStatus(STATUS_LOGOUT.getStatus());
+        memberRepository.save(findMember);
+
+        return LOGOUT_COMPLETE.getMessage();
 
     }
 

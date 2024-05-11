@@ -5,7 +5,7 @@ import lombok.*;
 
 import java.time.LocalDate;
 
-import static CloneCoding.NaverCafe.message.Login.STATUS_LOGOUT;
+import static CloneCoding.NaverCafe.security.LoginStatus.STATUS_LOGOUT;
 
 @Entity
 @Table(name = "MEMBER")

@@ -2,7 +2,7 @@ package CloneCoding.NaverCafe.domain.member.service;
 
 import CloneCoding.NaverCafe.domain.member.Member;
 import CloneCoding.NaverCafe.domain.member.repository.MemberRepository;
-import CloneCoding.NaverCafe.message.Login;
+import CloneCoding.NaverCafe.security.LoginStatus;
 import CloneCoding.NaverCafe.security.AesUtil;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -33,7 +33,7 @@ class MemberServiceImplTest {
         Member member = new Member
                 (1L, "java", "0000",
                 "testEmail@test.com", "Kim",
-                birthday, "01055558888", "intellij", Login.STATUS_LOGOUT.getStatus());
+                birthday, "01055558888", "intellij", LoginStatus.STATUS_LOGOUT.getStatus());
 
         // when
         Member joinMember = memberRepository.save(member);

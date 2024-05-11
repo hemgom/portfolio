@@ -13,4 +13,6 @@ public interface QueryMemberRepository {
 
     Member findByAccount(RequestLogin request);
 
+    Member findByAccountId(String accountId);
+
 }

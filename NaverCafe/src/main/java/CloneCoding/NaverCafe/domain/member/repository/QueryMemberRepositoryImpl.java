@@ -57,4 +57,13 @@ public class QueryMemberRepositoryImpl implements QueryMemberRepository {
                 .orElseThrow(() -> new NoSuchElementException("아이디 또는 비밀번호가 올바르지 않습니다."));
     }
 
+    @Override
+    public Member findByAccountId(String accountId) {
+        return Optional.ofNullable(query
+                        .selectFrom(member)
+                        .where(member.accountId.eq(accountId))
+                        .fetchOne())
+                .orElseThrow(() -> new NoSuchElementException("유효하지 않은 접근입니다."));
+    }
+
 }

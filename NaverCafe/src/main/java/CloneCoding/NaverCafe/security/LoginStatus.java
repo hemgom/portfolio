@@ -1,11 +1,11 @@
-package CloneCoding.NaverCafe.message;
+package CloneCoding.NaverCafe.security;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 @Getter
 @RequiredArgsConstructor
-public enum Login {
+public enum LoginStatus {
 
     STATUS_LOGIN("login"),
     STATUS_LOGOUT("logout")

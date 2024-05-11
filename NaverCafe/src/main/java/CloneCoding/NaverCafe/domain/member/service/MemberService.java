@@ -11,6 +11,8 @@ public interface MemberService {
 
     ResponseMemberInfo findMemberInfoById(Long id);
 
-    ResponseLogin login(RequestLogin request) ;
+    ResponseLogin login(RequestLogin request);
+
+    String logout(String token);
 
 }
