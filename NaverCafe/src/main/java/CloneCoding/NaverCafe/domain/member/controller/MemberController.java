@@ -53,4 +53,10 @@ public class MemberController {
         return memberService.updateAccountPassword(request, token);
     }
 
+    @DeleteMapping("/secede/{token}")
+    public String deleteMember(@PathVariable("token") String token) {
+        log.info("회원 탈퇴 요청");
+        return memberService.deleteMember(token);
+    }
+
 }

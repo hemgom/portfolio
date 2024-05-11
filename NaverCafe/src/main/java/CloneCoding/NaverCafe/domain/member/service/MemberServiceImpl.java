@@ -110,4 +110,19 @@ public class MemberServiceImpl implements MemberService {
 
     }
 
+    @Override
+    public String deleteMember(String token) {
+
+        String accountId = aesUtil.aesDecode(token);
+        Member findMember = memberRepository.findByAccountId(accountId);
+
+        if (memberRepository.checkLogin(findMember))
+            throw new RuntimeException(PLEASE_CHECK_LOGIN.getMessage());
+
+        memberRepository.delete(findMember);
+
+        return SECEDE_MEMBER_COMPLETE.getMessage();
+
+    }
+
 }

@@ -17,4 +17,6 @@ public interface MemberService {
 
     String updateAccountPassword(RequestUpdateAccountPassword request, String token);
 
+    String deleteMember(String token);
+
 }
