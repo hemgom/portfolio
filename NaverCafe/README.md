@@ -20,3 +20,4 @@
 3. [네이버 회원 정보 조회(읽기)](https://development-diary-for-me.tistory.com/6)
 4. [네이버 로그인](https://development-diary-for-me.tistory.com/7)
 5. [네이버 로그아웃](https://development-diary-for-me.tistory.com/8)
+6. [네이버 회원 정보 수정](https://development-diary-for-me.tistory.com/9)

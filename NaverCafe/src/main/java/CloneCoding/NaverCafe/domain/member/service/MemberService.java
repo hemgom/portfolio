@@ -1,9 +1,7 @@
 package CloneCoding.NaverCafe.domain.member.service;
 
-import CloneCoding.NaverCafe.domain.member.dto.RequestJoinMember;
-import CloneCoding.NaverCafe.domain.member.dto.RequestLogin;
-import CloneCoding.NaverCafe.domain.member.dto.ResponseLogin;
-import CloneCoding.NaverCafe.domain.member.dto.ResponseMemberInfo;
+import CloneCoding.NaverCafe.domain.member.dto.RequestUpdateAccountPassword;
+import CloneCoding.NaverCafe.domain.member.dto.*;
 
 public interface MemberService {
 
@@ -14,5 +12,9 @@ public interface MemberService {
     ResponseLogin login(RequestLogin request);
 
     String logout(String token);
+
+    ResponseMemberInfo updateMemberInfo(RequestUpdateMember request, String token);
+
+    String updateAccountPassword(RequestUpdateAccountPassword request, String token);
 
 }

@@ -1,5 +1,6 @@
 package CloneCoding.NaverCafe.domain.member;
 
+import CloneCoding.NaverCafe.domain.member.dto.RequestUpdateMember;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -46,6 +47,26 @@ public class Member {
 
     public void setLoginStatus(String status) {
         this.status = status;
+    }
+
+    public void updateInfo(RequestUpdateMember request) {
+
+        if (request.getEmail() != null) {
+            this.email = request.getEmail();
+        }
+
+        if (request.getPhoneNumber() != null) {
+            this.phoneNumber = request.getPhoneNumber();
+        }
+
+        if (request.getNickname() != null) {
+            this.nickname = request.getNickname();
+        }
+
+    }
+
+    public void updateAccountPassword(String changeAccountPassword) {
+        this.accountPassword = changeAccountPassword;
     }
 
 }

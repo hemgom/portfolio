@@ -1,6 +1,7 @@
 package CloneCoding.NaverCafe.exception.handler;
 
 import CloneCoding.NaverCafe.exception.CommonErrorCode;
+import CloneCoding.NaverCafe.exception.CustomException;
 import CloneCoding.NaverCafe.exception.ErrorCode;
 import CloneCoding.NaverCafe.exception.dto.ResponseError;
 import lombok.extern.slf4j.Slf4j;
@@ -29,11 +30,17 @@ public class GlobalExceptionHandler {
         return handleExceptionInternal(errorCode, e.getMessage());
     }
 
+    @ExceptionHandler(CustomException.class)
+    public ResponseEntity<Object> handleCustomException(CustomException e) {
+        ErrorCode errorCode = e.getErrorCode();
+        return handleExceptionInternal(errorCode, e.getMessage());
+    }
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Object> handleAllException(Exception e) {
         log.warn("handleAllException : ", e);
         ErrorCode errorCode = CommonErrorCode.INTERNAL_SERVER_ERROR;
-        return handleExceptionInternal(errorCode);
+        return handleExceptionInternal(errorCode, e.getMessage());
     }
 
     private ResponseEntity<Object> handleExceptionInternal(BindException e, ErrorCode errorCode) {

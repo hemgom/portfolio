@@ -1,9 +1,6 @@
 package CloneCoding.NaverCafe.domain.member.controller;
 
-import CloneCoding.NaverCafe.domain.member.dto.RequestJoinMember;
-import CloneCoding.NaverCafe.domain.member.dto.RequestLogin;
-import CloneCoding.NaverCafe.domain.member.dto.ResponseLogin;
-import CloneCoding.NaverCafe.domain.member.dto.ResponseMemberInfo;
+import CloneCoding.NaverCafe.domain.member.dto.*;
 import CloneCoding.NaverCafe.domain.member.service.MemberService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -40,6 +37,20 @@ public class MemberController {
     public String logout(@PathVariable("token") String token) {
         log.info("로그아웃 요청");
         return memberService.logout(token);
+    }
+
+    @PutMapping("/update/{token}")
+    public ResponseMemberInfo updateMemberInfo(@RequestBody @Valid RequestUpdateMember request,
+                                               @PathVariable("token") String token) {
+        log.info("회원 정보 수정 요청");
+        return memberService.updateMemberInfo(request, token);
+    }
+
+    @PutMapping("/update/accountPassword/{token}")
+    public String updateAccountPassword(@RequestBody @Valid RequestUpdateAccountPassword request,
+                                        @PathVariable("token") String token) {
+        log.info("회원 계정 비밀번호 수정 요청");
+        return memberService.updateAccountPassword(request, token);
     }
 
 }
