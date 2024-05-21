@@ -23,7 +23,8 @@ public enum SystemMessage {
             System.lineSeparator() +
             "변경된 비밀번호로 다시 로그인 해주세요."),
 
-    SECEDE_MEMBER_COMPLETE("회원 탈퇴가 완료되었습니다.")
+    SECEDE_MEMBER_COMPLETE("회원 탈퇴가 완료되었습니다."),
+    CREATE_CAFE_COMPLETE("카페 생성이 완료되었습니다."),
     ;
 
     private final String message;

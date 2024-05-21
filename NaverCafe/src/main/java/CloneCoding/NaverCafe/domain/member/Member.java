@@ -35,6 +35,9 @@ public class Member {
     @Column(name = "BIRTHDAY")
     private LocalDate birthday;
 
+    @Column(name = "GENDER")
+    private String gender;
+
     @Column(name = "PHONE_NUMBER", unique = true)
     private String phoneNumber;
 

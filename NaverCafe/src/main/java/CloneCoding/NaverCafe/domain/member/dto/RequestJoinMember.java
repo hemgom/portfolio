@@ -51,6 +51,9 @@ public class RequestJoinMember {
     @Max(value = 31, message = "태어난 날의 입력 가능 범위는 1 ~ 31 입니다.")
     private int day;
 
+    @NotBlank
+    private String gender;
+
     @NotNull
     @Size(min = 11, max = 11, message = "휴대전화번호는 11자 입니다.")
     @Pattern(regexp = "^[0-9]+", message = "휴대전화번호는 숫자만 입력 가능합니다.")

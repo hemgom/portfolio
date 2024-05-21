@@ -33,6 +33,7 @@ public class QueryMemberRepositoryImpl implements QueryMemberRepository {
                 .email(request.getEmail())
                 .username(request.getUsername())
                 .birthday(birth)
+                .gender(request.getGender())
                 .phoneNumber(request.getPhoneNumber())
                 .nickname(request.getNickname())
                 .build();

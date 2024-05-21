@@ -15,10 +15,13 @@
 
 ## 구현 스펙
 기능 구현에 대한 내용을 개인 블로그에 포스팅 해두었다. 항목 클릭 시 해당 포스팅으로 이동된다.
-1. [네이버 회원 가입(등록)](https://development-diary-for-me.tistory.com/4)
-2. [예외 처리](https://development-diary-for-me.tistory.com/5)
-3. [네이버 회원 정보 조회(읽기)](https://development-diary-for-me.tistory.com/6)
-4. [네이버 로그인](https://development-diary-for-me.tistory.com/7)
-5. [네이버 로그아웃](https://development-diary-for-me.tistory.com/8)
-6. [네이버 회원 정보 수정](https://development-diary-for-me.tistory.com/9)
-7. [네이버 회원 탈퇴](https://development-diary-for-me.tistory.com/10)
+1. 네이버 회원
+   - [네이버 회원 가입(등록)](https://development-diary-for-me.tistory.com/4)
+   - [예외 처리](https://development-diary-for-me.tistory.com/5)
+   - [네이버 회원 정보 조회(읽기)](https://development-diary-for-me.tistory.com/6)
+   - [네이버 로그인](https://development-diary-for-me.tistory.com/7)
+   - [네이버 로그아웃](https://development-diary-for-me.tistory.com/8)
+   - [네이버 회원 정보 수정](https://development-diary-for-me.tistory.com/9)
+   - [네이버 회원 탈퇴](https://development-diary-for-me.tistory.com/10)
+2. 네이버 카페
+   - [카페 만들기](https://development-diary-for-me.tistory.com/12)
