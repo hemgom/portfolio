@@ -21,23 +21,13 @@ import static CloneCoding.NaverCafe.message.SystemMessage.CREATE_CAFE_COMPLETE;
 public class CafeController {
 
     private final CafeService cafeService;
-    private final KeywordService keywordService;
-    private final CafeMemberService cafeMemberService;
 
     @PostMapping("/create")
     public String createCafe(@RequestBody @Valid RequestCreateCafe request,
                              @RequestHeader("Authorization") String token) {
         log.info("카페 생성 요청");
 
-        Cafe madeCafe = cafeService.createCafe(request.getCafeInfo());
-
-        if (!request.getKeywords().isEmpty()) {
-            keywordService.applyKeywords(request.getKeywords(), madeCafe);
-        }
-
-        cafeMemberService.addCafeManager(token, madeCafe);
-
-        return CREATE_CAFE_COMPLETE.getMessage();
+        return cafeService.createCafe(request, token);
     }
 
 }
