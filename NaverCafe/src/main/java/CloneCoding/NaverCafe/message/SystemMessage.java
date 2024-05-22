@@ -25,6 +25,7 @@ public enum SystemMessage {
 
     SECEDE_MEMBER_COMPLETE("회원 탈퇴가 완료되었습니다."),
     CREATE_CAFE_COMPLETE("카페 생성이 완료되었습니다."),
+    JOIN_COMPLETE_CAFE("정상적으로 가입을 완료했습니다!")
     ;
 
     private final String message;

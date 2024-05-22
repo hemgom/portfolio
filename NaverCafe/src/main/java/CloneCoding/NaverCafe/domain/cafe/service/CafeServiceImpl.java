@@ -14,8 +14,11 @@ import CloneCoding.NaverCafe.security.AesUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
+import static CloneCoding.NaverCafe.message.SystemMessage.*;
 
 @Service
 @RequiredArgsConstructor
@@ -30,27 +33,34 @@ public class CafeServiceImpl implements CafeService {
     @Override
     public String createCafe(RequestCreateCafe request, String token) {
 
-        Cafe madeCafe = Cafe.createCafe(request.getCafeInfo());
+        Cafe cafe = Cafe.createCafe(request.getCafeInfo());
 
         String accountId = aesUtil.aesDecode(token);
         Member findMember = memberRepository.findByAccountId(accountId);
 
-        List<Keyword> keywords = new ArrayList<>();
+        List<Keyword> keywords = createKeywords(request.getKeywords(), cafe);
 
-        if (!request.getKeywords().isEmpty()) {
-            keywords = Keyword.createKeywords(request.getKeywords(), madeCafe);
-        }
-
-        CafeMember cafeManager = CafeMember.addCafeManager(
+        CafeMember cafeManager = CafeMember.createCafeManager(
                 findMember.getAccountId(), findMember.getNickname(),
-                findMember.getGender(), findMember.getBirthday(), madeCafe);
+                findMember.getGender(), findMember.getBirthday(), cafe
+        );
 
-        cafeRepository.save(madeCafe);
+        cafeRepository.save(cafe);
         keywordRepository.saveAll(keywords);
         cafeMemberRepository.save(cafeManager);
 
-        return SystemMessage.CREATE_CAFE_COMPLETE.getMessage();
+        return CREATE_CAFE_COMPLETE.getMessage();
 
+    }
+
+    private List<Keyword> createKeywords(List<String> keywords, Cafe cafe) {
+        List<Keyword> result = new ArrayList<>();
+
+        if (!keywords.isEmpty()) {
+            result = Keyword.createKeywords(keywords, cafe);
+        }
+
+        return result;
     }
 
 }

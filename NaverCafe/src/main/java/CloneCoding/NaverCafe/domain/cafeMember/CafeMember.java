@@ -1,6 +1,8 @@
 package CloneCoding.NaverCafe.domain.cafeMember;
 
 import CloneCoding.NaverCafe.domain.cafe.Cafe;
+import CloneCoding.NaverCafe.domain.cafeMember.dto.RequestJoinCafeMember;
+import CloneCoding.NaverCafe.domain.member.Member;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -56,7 +58,7 @@ public class CafeMember {
     @JoinColumn(name = "CAFE_ID")
     private Cafe cafeId;
 
-    public static CafeMember addCafeManager(String accountId, String nickname,
+    public static CafeMember createCafeManager(String accountId, String nickname,
                                              String gender, LocalDate birthday,
                                              Cafe cafe) {
         return CafeMember.builder()
@@ -68,6 +70,30 @@ public class CafeMember {
                 .grade(MANAGER.getGrade())
                 .cafeId(cafe)
                 .build();
+    }
+
+    public static CafeMember createCafeMember(RequestJoinCafeMember.CafeMemberInfo request,
+                                              Cafe cafe, Member member) {
+
+        String nickname = checkNickname(request.getNickname(), member.getNickname());
+
+        return CafeMember.builder()
+                .accountId(member.getAccountId())
+                .nickname(nickname)
+                .profileImage(request.getProfileImage())
+                .openSetting(request.isOpenSetting())
+                .gender(member.getGender())
+                .birthday(member.getBirthday())
+                .cafeId(cafe)
+                .build();
+    }
+
+    private static String checkNickname(String request, String basic) {
+
+        if (request.isEmpty()) return basic;
+
+        return request;
+
     }
 
 }
