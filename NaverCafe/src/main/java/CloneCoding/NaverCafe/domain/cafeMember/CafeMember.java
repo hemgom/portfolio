@@ -2,6 +2,7 @@ package CloneCoding.NaverCafe.domain.cafeMember;
 
 import CloneCoding.NaverCafe.domain.cafe.Cafe;
 import CloneCoding.NaverCafe.domain.cafeMember.dto.RequestJoinCafeMember;
+import CloneCoding.NaverCafe.domain.cafeMember.dto.RequestUpdateCafeMember;
 import CloneCoding.NaverCafe.domain.member.Member;
 import jakarta.persistence.*;
 import lombok.*;
@@ -22,10 +23,10 @@ public class CafeMember {
     @Column(name = "ID")
     private Long id;
 
-    @Column(name = "ACCOUNT_ID", unique = true)
+    @Column(name = "ACCOUNT_ID")
     private String accountId;
 
-    @Column(name = "NICKNAME", unique = true)
+    @Column(name = "NICKNAME")
     private String nickname;
 
     @Column(name = "PROFILE_IMAGE")
@@ -36,9 +37,17 @@ public class CafeMember {
     @Builder.Default
     private String description = "자기소개를 입력해주세요";
 
-    @Column(name = "OPEN_SETTING")
+    @Column(name = "GENDER_AGE_OPEN")
     @Builder.Default
-    private boolean openSetting = true;
+    private boolean genderAgeOpen = true;
+
+    @Column(name = "MY_BLOG_OPEN")
+    @Builder.Default
+    private boolean myBlogOpen = false;
+
+    @Column(name = "POPULAR_MEMBER_PUSH")
+    @Builder.Default
+    private boolean popularMemberPush = true;
 
     @Column(name = "GENDER")
     private String gender;
@@ -81,7 +90,7 @@ public class CafeMember {
                 .accountId(member.getAccountId())
                 .nickname(nickname)
                 .profileImage(request.getProfileImage())
-                .openSetting(request.isOpenSetting())
+                .genderAgeOpen(request.isGenderAgeOpen())
                 .gender(member.getGender())
                 .birthday(member.getBirthday())
                 .cafeId(cafe)
@@ -93,6 +102,21 @@ public class CafeMember {
         if (request.isEmpty()) return basic;
 
         return request;
+
+    }
+
+    public void update(RequestUpdateCafeMember.UpdateCafeMemberInfo request) {
+
+        this.profileImage = request.getProfileImage();
+
+        if (!request.getNickname().isEmpty()) {
+            this.nickname = request.getNickname();
+        }
+
+        this.description = request.getDescription();
+        this.genderAgeOpen = request.isOpenSetting();
+        this.myBlogOpen = request.isMyBlogOpen();
+        this.popularMemberPush = request.isPopularMemberPush();
 
     }
 

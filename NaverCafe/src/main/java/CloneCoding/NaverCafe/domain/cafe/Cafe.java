@@ -33,7 +33,7 @@ public class Cafe {
     private String icon;
 
     @Column(name = "PRIVACY_JOIN_SETTING")
-    private String privacyJoinSetting;
+    private String howToJoin;
 
     @Column(name = "USE_REAL_NAME")
     private boolean useRealName;
@@ -61,13 +61,13 @@ public class Cafe {
 
     public static Cafe createCafe(RequestCreateCafe.CafeInfo cafeInfo) {
 
-        PrivacyJoinSetting setting = PrivacyJoinSetting.findByOption(cafeInfo.getPrivacyJoinSetting());
+        HowToJoin htj = HowToJoin.findByOption(cafeInfo.getHowToJoin());
 
         return Cafe.builder()
                 .name(cafeInfo.getName())
                 .url(BASIC_URL.getUrl() + cafeInfo.getUrl())
                 .icon(cafeInfo.getIcon())
-                .privacyJoinSetting(setting.name())
+                .howToJoin(htj.name())
                 .useRealName(cafeInfo.isUseRealName())
                 .openMemberList(cafeInfo.isOpenMemberList())
                 .mainCategory(cafeInfo.getMainCategory())

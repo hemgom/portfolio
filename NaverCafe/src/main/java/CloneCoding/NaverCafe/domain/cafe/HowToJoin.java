@@ -7,7 +7,7 @@ import java.util.NoSuchElementException;
 
 @Getter
 @RequiredArgsConstructor
-public enum PrivacyJoinSetting {
+public enum HowToJoin {
 
     SIGN_UP_NOW("바로 가입"),
     SIGN_UP_APPROVED("가입 승인"),
@@ -16,9 +16,9 @@ public enum PrivacyJoinSetting {
 
     private final String option;
 
-    public static PrivacyJoinSetting findByOption(String option) {
+    public static HowToJoin findByOption(String option) {
 
-        for (PrivacyJoinSetting setting : values()) {
+        for (HowToJoin setting : values()) {
             if (setting.getOption().equals(option)) {
                 return setting;
             }

@@ -24,8 +24,14 @@ public enum SystemMessage {
             "변경된 비밀번호로 다시 로그인 해주세요."),
 
     SECEDE_MEMBER_COMPLETE("회원 탈퇴가 완료되었습니다."),
+
     CREATE_CAFE_COMPLETE("카페 생성이 완료되었습니다."),
-    JOIN_COMPLETE_CAFE("정상적으로 가입을 완료했습니다!")
+
+    JOIN_COMPLETE_CAFE("정상적으로 가입을 완료했습니다!"),
+
+    UPDATE_CAFE_MEMBER_INFO("카페 회원 정보 수정이 완료되었습니다."),
+
+    NICKNAME_NOT_UNIQUE("중복된 별명입니다. 다른 별명을 입력하세요.")
     ;
 
     private final String message;

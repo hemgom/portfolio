@@ -1,6 +1,6 @@
 package CloneCoding.NaverCafe.domain.cafe.dto;
 
-import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
@@ -16,7 +16,9 @@ import java.util.List;
 @AllArgsConstructor
 public class RequestCreateCafe {
 
+    @NotNull @Valid
     private CafeInfo cafeInfo;
+
     private List<String> keywords = new ArrayList<>();
 
     @Getter
@@ -24,9 +26,11 @@ public class RequestCreateCafe {
     @AllArgsConstructor
     public static class CafeInfo {
 
-        @NotEmpty
+        @NotNull
         @Size(min = 1, max = 60,
                 message = "카페 이름은 1 ~ 60자로 제한됩니다.")
+        @Pattern(regexp = "\\s*([0-9\\S]+)\\s*",
+                message = "카페 이름은 공백, 탭을 제외한 문자가 적어도 하나 이상 존재해야 합니다.")
         private String name;
 
         @NotNull
@@ -36,10 +40,11 @@ public class RequestCreateCafe {
                 message = "카페 주소는 영소문자, 영대문자, 숫자만 사용 가능합니다.")
         private String url;
 
-        private String icon = "basic_img";
+        @NotNull
+        private String icon;
 
         @NotNull
-        private String privacyJoinSetting;
+        private String howToJoin;
 
         @NotNull
         private boolean useRealName;
@@ -56,7 +61,8 @@ public class RequestCreateCafe {
         @NotNull
         private String description;
 
-        private String activityArea = "없음";
+        @NotNull
+        private String activityArea;
 
     }
 
