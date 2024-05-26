@@ -15,4 +15,6 @@ public interface CafeMemberService {
 
     String updateCafeMember(String url, RequestUpdateCafeMember request, String token);
 
+    String deleteCafeMember(String url, String token);
+
 }

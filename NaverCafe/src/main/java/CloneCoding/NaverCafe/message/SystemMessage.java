@@ -31,7 +31,9 @@ public enum SystemMessage {
 
     UPDATE_CAFE_MEMBER_INFO("카페 회원 정보 수정이 완료되었습니다."),
 
-    NICKNAME_NOT_UNIQUE("중복된 별명입니다. 다른 별명을 입력하세요.")
+    NICKNAME_NOT_UNIQUE("중복된 별명입니다. 다른 별명을 입력하세요."),
+
+    DELETE_CAFE_MEMBER_COMPLETE("카페 탈퇴를 완료하였습니다."),
     ;
 
     private final String message;

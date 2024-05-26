@@ -14,8 +14,7 @@ import CloneCoding.NaverCafe.security.AesUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import static CloneCoding.NaverCafe.message.SystemMessage.JOIN_COMPLETE_CAFE;
-import static CloneCoding.NaverCafe.message.SystemMessage.UPDATE_CAFE_MEMBER_INFO;
+import static CloneCoding.NaverCafe.message.SystemMessage.*;
 
 @Service
 @RequiredArgsConstructor
@@ -77,6 +76,18 @@ public class CafeMemberServiceImpl implements CafeMemberService {
         cafeMemberRepository.save(findCafeMember);
 
         return UPDATE_CAFE_MEMBER_INFO.getMessage();
+
+    }
+
+    @Override
+    public String deleteCafeMember(String url, String token) {
+
+        Cafe findcafe = checkCafe(url);
+        CafeMember findCafeMember = checkCafeMember(findcafe, token);
+
+        cafeMemberRepository.delete(findCafeMember);
+
+        return DELETE_CAFE_MEMBER_COMPLETE.getMessage();
 
     }
 

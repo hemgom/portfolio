@@ -48,4 +48,11 @@ public class CafeMemberController {
         return cafeMemberService.updateCafeMember(url, request, token);
     }
 
+    @DeleteMapping()
+    public String deleteCafeMember(@PathVariable("cafe_url") String url,
+                                   @RequestHeader("Authorization") String token) {
+        log.info("카페 회원 탈퇴");
+        return cafeMemberService.deleteCafeMember(url, token);
+    }
+
 }
