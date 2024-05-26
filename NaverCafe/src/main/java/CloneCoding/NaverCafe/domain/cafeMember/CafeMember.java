@@ -9,10 +9,18 @@ import lombok.*;
 
 import java.time.LocalDate;
 
-import static CloneCoding.NaverCafe.domain.cafeMember.CafeMemberPosition.*;
+import static CloneCoding.NaverCafe.domain.cafeMember.enums.CafeMemberPosition.*;
 
 @Entity
-@Table(name = "CAFE_MEMBER")
+@Table(name = "CAFE_MEMBER", uniqueConstraints = {
+        @UniqueConstraint(
+                name = "ACCOUNT_ID_UNIQUE",
+                columnNames = {"CAFE_ID", "ACCOUNT_ID"}
+        ),
+        @UniqueConstraint(
+                name = "USERNAME_UNIQUE",
+                columnNames = {"CAFE_ID", "NICKNAME"}
+        )})
 @Getter
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -81,7 +89,7 @@ public class CafeMember {
                 .build();
     }
 
-    public static CafeMember createCafeMember(RequestJoinCafeMember.CafeMemberInfo request,
+    public static CafeMember createCafeMember(RequestJoinCafeMember request,
                                               Cafe cafe, Member member) {
 
         String nickname = checkNickname(request.getNickname(), member.getNickname());
@@ -105,7 +113,7 @@ public class CafeMember {
 
     }
 
-    public void update(RequestUpdateCafeMember.UpdateCafeMemberInfo request) {
+    public void update(RequestUpdateCafeMember request) {
 
         this.profileImage = request.getProfileImage();
 

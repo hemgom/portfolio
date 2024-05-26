@@ -27,12 +27,4 @@ public class QueryCafeMemberRepositoryImpl implements QueryCafeMemberRepository 
                 .orElseThrow(() -> new NoSuchElementException("해당 계정 정보를 가진 카페 회원이 존재하지 않습니다."));
     }
 
-    @Override
-    public CafeMember checkNicknameUnique(Cafe cafe, String nickname) {
-        return query
-                .selectFrom(cafeMember)
-                .where(cafeMember.cafeId.eq(cafe), cafeMember.nickname.eq(nickname))
-                .fetchOne();
-    }
-
 }

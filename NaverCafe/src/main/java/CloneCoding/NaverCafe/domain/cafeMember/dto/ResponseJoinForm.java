@@ -2,7 +2,7 @@ package CloneCoding.NaverCafe.domain.cafeMember.dto;
 
 import lombok.Getter;
 
-import static CloneCoding.NaverCafe.domain.cafeMember.FormBasicData.DEFAULT_PROFILE_IMAGE;
+import static CloneCoding.NaverCafe.domain.cafeMember.enums.FormBasicData.DEFAULT_PROFILE_IMAGE;
 
 @Getter
 public class ResponseJoinForm {

@@ -6,6 +6,7 @@ import CloneCoding.NaverCafe.domain.cafeMember.CafeMember;
 import CloneCoding.NaverCafe.domain.cafeMember.dto.RequestJoinCafeMember;
 import CloneCoding.NaverCafe.domain.cafeMember.dto.RequestUpdateCafeMember;
 import CloneCoding.NaverCafe.domain.cafeMember.dto.ResponseJoinForm;
+import CloneCoding.NaverCafe.domain.cafeMember.dto.ResponseUpdateForm;
 import CloneCoding.NaverCafe.domain.cafeMember.repository.CafeMemberRepository;
 import CloneCoding.NaverCafe.domain.member.Member;
 import CloneCoding.NaverCafe.domain.member.repository.MemberRepository;
@@ -13,8 +14,8 @@ import CloneCoding.NaverCafe.security.AesUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import static CloneCoding.NaverCafe.domain.cafe.BasicURL.BASIC_URL;
-import static CloneCoding.NaverCafe.message.SystemMessage.*;
+import static CloneCoding.NaverCafe.message.SystemMessage.JOIN_COMPLETE_CAFE;
+import static CloneCoding.NaverCafe.message.SystemMessage.UPDATE_CAFE_MEMBER_INFO;
 
 @Service
 @RequiredArgsConstructor
@@ -25,46 +26,53 @@ public class CafeMemberServiceImpl implements CafeMemberService {
     private final MemberRepository memberRepository;
     private final AesUtil aesUtil;
 
+    @Override
     public ResponseJoinForm createJoinForm(String url, String token) {
 
-        checkCafe(BASIC_URL.getUrl() + url);
-
-        String accountId = aesUtil.aesDecode(token);
-        Member findMember = memberRepository.findByAccountId(accountId);
+        checkCafe(url);
+        Member findMember = checkMember(token);
 
         return new ResponseJoinForm(findMember.getNickname());
 
     }
 
     @Override
-    public String joinCafeMember(RequestJoinCafeMember request, String token) {
+    public String joinCafeMember(String url, RequestJoinCafeMember request, String token) {
 
-        Cafe findCafe = checkCafe(request.getUrl());
+        Cafe findCafe = checkCafe(url);
         Member findMember = checkMember(token);
 
-        CafeMember cafeMember = CafeMember.createCafeMember(request.getCafeMemberInfo(), findCafe, findMember);
+        CafeMember cafeMember = CafeMember.createCafeMember(request, findCafe, findMember);
 
-        if (checkNicknameUnique(findCafe, cafeMember.getNickname())) {
-            cafeMemberRepository.save(cafeMember);
-        } else {
-            return NICKNAME_NOT_UNIQUE.getMessage();
-        }
+        cafeMemberRepository.save(cafeMember);
 
         return JOIN_COMPLETE_CAFE.getMessage();
 
     }
 
     @Override
-    public String updateCafeMember(RequestUpdateCafeMember request, String token) {
+    public ResponseUpdateForm createUpdateForm(String url, String token) {
 
-        if (!request.getUpdateCafeMemberInfo().getNickname().isEmpty()) {
-
-        }
-
-        Cafe findCafe = checkCafe(request.getUrl());
+        Cafe findCafe = checkCafe(url);
         CafeMember findCafeMember = checkCafeMember(findCafe, token);
 
-        findCafeMember.update(request.getUpdateCafeMemberInfo());
+        return ResponseUpdateForm.builder()
+                .profileImage(findCafeMember.getProfileImage())
+                .nickname(findCafeMember.getNickname())
+                .description(findCafeMember.getDescription())
+                .genderAgeOpen(findCafeMember.isGenderAgeOpen())
+                .myBlogOpen(findCafeMember.isMyBlogOpen())
+                .popularMemberPush(findCafeMember.isPopularMemberPush())
+                .build();
+    }
+
+    @Override
+    public String updateCafeMember(String url, RequestUpdateCafeMember request, String token) {
+
+        Cafe findCafe = checkCafe(url);
+        CafeMember findCafeMember = checkCafeMember(findCafe, token);
+
+        findCafeMember.update(request);
 
         cafeMemberRepository.save(findCafeMember);
 
@@ -79,11 +87,6 @@ public class CafeMemberServiceImpl implements CafeMemberService {
     private Member checkMember(String token) {
         String accountId = aesUtil.aesDecode(token);
         return memberRepository.findByAccountId(accountId);
-    }
-
-    private boolean checkNicknameUnique(Cafe cafe, String nickname) {
-        CafeMember findCafeMember = cafeMemberRepository.checkNicknameUnique(cafe, nickname);
-        return findCafeMember == null;
     }
 
     private CafeMember checkCafeMember(Cafe cafe, String token) {

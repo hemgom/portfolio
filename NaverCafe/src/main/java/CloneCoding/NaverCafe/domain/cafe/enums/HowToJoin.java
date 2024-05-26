@@ -1,4 +1,4 @@
-package CloneCoding.NaverCafe.domain.cafe;
+package CloneCoding.NaverCafe.domain.cafe.enums;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

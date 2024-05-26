@@ -7,6 +7,4 @@ public interface QueryCafeMemberRepository {
 
     CafeMember findByAccountId(Cafe cafe, String accountId);
 
-    CafeMember checkNicknameUnique(Cafe cafe, String nickname);
-
 }

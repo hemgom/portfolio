@@ -1,10 +1,10 @@
 package CloneCoding.NaverCafe.domain.cafe.dto;
 
-import CloneCoding.NaverCafe.domain.cafe.HowToJoin;
+import CloneCoding.NaverCafe.domain.cafe.enums.HowToJoin;
 import lombok.Getter;
 
-import static CloneCoding.NaverCafe.domain.cafe.BasicURL.BASIC_URL;
-import static CloneCoding.NaverCafe.domain.cafe.FormBasicData.*;
+import static CloneCoding.NaverCafe.domain.cafe.enums.BasicURL.BASIC_URL;
+import static CloneCoding.NaverCafe.domain.cafe.enums.FormBasicData.*;
 
 @Getter
 public class ResponseCreateForm {

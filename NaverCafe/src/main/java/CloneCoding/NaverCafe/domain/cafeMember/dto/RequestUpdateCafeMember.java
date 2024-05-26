@@ -13,28 +13,23 @@ import lombok.NoArgsConstructor;
 public class RequestUpdateCafeMember {
 
     @NotNull
-    private String url;
+    private String profileImage;
 
     @NotNull
-    private UpdateCafeMemberInfo updateCafeMemberInfo;
+    @Size(min = 2, max = 20, message = "별명은 2 ~ 20자로 제한됩니다.")
+    @Pattern(regexp = "^[a-zA-Z0-9]+", message = "별명은 영소문자, 영대문자, 숫자만 입력 가능합니다.")
+    private String nickname;
 
-    @Getter
-    @NoArgsConstructor
-    @AllArgsConstructor
-    public static class UpdateCafeMemberInfo {
+    @NotNull
+    private String description;
 
-        private String profileImage = "default_image";
+    @NotNull
+    private boolean openSetting;
 
-        private String nickname = "";
+    @NotNull
+    private boolean myBlogOpen;
 
-        private String description = "";
-
-        private boolean openSetting = true;
-
-        private boolean myBlogOpen = false;
-
-        private boolean popularMemberPush = true;
-
-    }
+    @NotNull
+    private boolean popularMemberPush;
 
 }

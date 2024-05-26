@@ -1,6 +1,7 @@
 package CloneCoding.NaverCafe.domain.cafe;
 
 import CloneCoding.NaverCafe.domain.cafe.dto.RequestCreateCafe;
+import CloneCoding.NaverCafe.domain.cafe.enums.HowToJoin;
 import CloneCoding.NaverCafe.domain.cafeMember.CafeMember;
 import CloneCoding.NaverCafe.domain.keyword.Keyword;
 import jakarta.persistence.*;
@@ -9,7 +10,7 @@ import lombok.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static CloneCoding.NaverCafe.domain.cafe.BasicURL.BASIC_URL;
+import static CloneCoding.NaverCafe.domain.cafe.enums.BasicURL.BASIC_URL;
 
 @Entity
 @Table(name = "CAFE")
@@ -65,7 +66,7 @@ public class Cafe {
 
         return Cafe.builder()
                 .name(cafeInfo.getName())
-                .url(BASIC_URL.getUrl() + cafeInfo.getUrl())
+                .url(cafeInfo.getUrl())
                 .icon(cafeInfo.getIcon())
                 .howToJoin(htj.name())
                 .useRealName(cafeInfo.isUseRealName())
