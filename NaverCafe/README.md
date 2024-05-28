@@ -25,7 +25,8 @@
    - [네이버 회원 탈퇴](https://development-diary-for-me.tistory.com/10)
 2. 네이버 카페
    - [카페 만들기](https://development-diary-for-me.tistory.com/12)
-   - [카페 회원 가입](https://development-diary-for-me.tistory.com/13)
-   - [카페 회원정보 수정](https://development-diary-for-me.tistory.com/14)
-   - [카페 회원 탈퇴](https://development-diary-for-me.tistory.com/15)
+   - [회원 가입](https://development-diary-for-me.tistory.com/13)
+   - [회원정보 수정](https://development-diary-for-me.tistory.com/14)
+   - [회원 탈퇴](https://development-diary-for-me.tistory.com/15)
    - [카페 생성시 기본 게시판](https://development-diary-for-me.tistory.com/16)
+   - [일반 게시판 추가](https://development-diary-for-me.tistory.com/17)

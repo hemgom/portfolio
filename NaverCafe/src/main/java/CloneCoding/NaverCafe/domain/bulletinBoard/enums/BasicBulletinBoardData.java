@@ -8,7 +8,8 @@ import lombok.RequiredArgsConstructor;
 public enum BasicBulletinBoardData {
 
     BASIC_NAME("자유게시판"),
-    BASIC_DESCRIPTION(""),
+    GENERAL_NAME("새로운 통합게시판"),
+    DESCRIPTION(""),
     ;
 
     private final String value;

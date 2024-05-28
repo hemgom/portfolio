@@ -3,6 +3,8 @@ package CloneCoding.NaverCafe.domain.cafeMember.enums;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
+import java.util.NoSuchElementException;
+
 @Getter
 @RequiredArgsConstructor
 public enum CafeMemberPosition {
@@ -23,5 +25,17 @@ public enum CafeMemberPosition {
     private final String grade;
     private final String position;
     private final String detailPosition;
+
+    public static CafeMemberPosition findByPosition(String position) {
+
+        for (CafeMemberPosition p : values()) {
+            if (p.getPosition().equals(position)) {
+                return p;
+            }
+        }
+
+        throw new RuntimeException(new NoSuchElementException("포지션 정보를 찾을 수 없습니다."));
+
+    }
 
 }
