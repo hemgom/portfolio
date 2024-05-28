@@ -28,3 +28,4 @@
    - [카페 회원 가입](https://development-diary-for-me.tistory.com/13)
    - [카페 회원정보 수정](https://development-diary-for-me.tistory.com/14)
    - [카페 회원 탈퇴](https://development-diary-for-me.tistory.com/15)
+   - [카페 생성시 기본 게시판](https://development-diary-for-me.tistory.com/16)

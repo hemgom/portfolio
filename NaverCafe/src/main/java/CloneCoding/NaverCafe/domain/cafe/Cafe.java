@@ -1,5 +1,6 @@
 package CloneCoding.NaverCafe.domain.cafe;
 
+import CloneCoding.NaverCafe.domain.bulletinBoard.BulletinBoard;
 import CloneCoding.NaverCafe.domain.cafe.dto.RequestCreateCafe;
 import CloneCoding.NaverCafe.domain.cafe.enums.HowToJoin;
 import CloneCoding.NaverCafe.domain.cafeMember.CafeMember;
@@ -59,6 +60,9 @@ public class Cafe {
 
     @OneToMany(mappedBy = "cafeId", fetch = FetchType.LAZY)
     private List<CafeMember> members = new ArrayList<>();
+
+    @OneToMany(mappedBy = "cafeId", fetch = FetchType.LAZY)
+    private List<BulletinBoard> bulletinBoards = new ArrayList<>();
 
     public static Cafe createCafe(RequestCreateCafe.CafeInfo cafeInfo) {
 
