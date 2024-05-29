@@ -38,4 +38,16 @@ public enum CafeMemberPosition {
 
     }
 
+    public static String changeNameToPosition(String name) {
+
+        for (CafeMemberPosition p : values()) {
+            if (p.name().equals(name)) {
+                return p.getPosition();
+            }
+        }
+
+        throw new RuntimeException(new NoSuchElementException("포지션 정보를 찾을 수 없습니다."));
+
+    }
+
 }

@@ -1,4 +1,4 @@
-package CloneCoding.NaverCafe.domain.bulletinBoard.repository;
+package CloneCoding.NaverCafe.domain.menu.normal.integrate.repository;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 @RequiredArgsConstructor
-public class QueryBulletinBoardRepositoryImpl implements QueryBulletinBoardRepository {
+public class QueryIntegrateRepositoryImpl implements QueryIntegrateRepository {
 
     private final JPAQueryFactory query;
 

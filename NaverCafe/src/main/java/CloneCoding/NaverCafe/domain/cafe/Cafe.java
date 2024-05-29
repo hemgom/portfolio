@@ -1,6 +1,6 @@
 package CloneCoding.NaverCafe.domain.cafe;
 
-import CloneCoding.NaverCafe.domain.bulletinBoard.BulletinBoard;
+import CloneCoding.NaverCafe.domain.menu.normal.integrate.Integrate;
 import CloneCoding.NaverCafe.domain.cafe.dto.RequestCreateCafe;
 import CloneCoding.NaverCafe.domain.cafe.enums.HowToJoin;
 import CloneCoding.NaverCafe.domain.cafeMember.CafeMember;
@@ -10,8 +10,6 @@ import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static CloneCoding.NaverCafe.domain.cafe.enums.BasicURL.BASIC_URL;
 
 @Entity
 @Table(name = "CAFE")
@@ -62,7 +60,7 @@ public class Cafe {
     private List<CafeMember> members = new ArrayList<>();
 
     @OneToMany(mappedBy = "cafeId", fetch = FetchType.LAZY)
-    private List<BulletinBoard> bulletinBoards = new ArrayList<>();
+    private List<Integrate> integrates = new ArrayList<>();
 
     public static Cafe createCafe(RequestCreateCafe.CafeInfo cafeInfo) {
 

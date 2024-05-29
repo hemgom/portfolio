@@ -1,15 +1,15 @@
-package CloneCoding.NaverCafe.domain.bulletinBoard.dto;
+package CloneCoding.NaverCafe.domain.menu.normal.integrate.dto;
 
 import lombok.Getter;
 
-import static CloneCoding.NaverCafe.domain.bulletinBoard.enums.BasicBulletinBoardData.DESCRIPTION;
-import static CloneCoding.NaverCafe.domain.bulletinBoard.enums.BasicBulletinBoardData.GENERAL_NAME;
+import static CloneCoding.NaverCafe.domain.menu.normal.integrate.enums.BasicData.DESCRIPTION;
+import static CloneCoding.NaverCafe.domain.menu.normal.integrate.enums.BasicData.GENERAL_NAME;
 import static CloneCoding.NaverCafe.domain.cafeMember.enums.CafeMemberPosition.CAFE_MEMBER;
 
 @Getter
-public class ResponseGeneralCreateForm {
+public class ResponseCreateForm {
 
-    public ResponseGeneralCreateForm() {
+    public ResponseCreateForm() {
         this.name = GENERAL_NAME.getValue();
         this.description = DESCRIPTION.getValue();
         this.writeAuth = CAFE_MEMBER.getPosition();

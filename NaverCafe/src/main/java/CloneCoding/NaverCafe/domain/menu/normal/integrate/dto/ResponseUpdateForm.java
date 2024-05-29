@@ -1,35 +1,28 @@
-package CloneCoding.NaverCafe.domain.bulletinBoard.dto;
+package CloneCoding.NaverCafe.domain.menu.normal.integrate.dto;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Getter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class RequestCreateGeneralBulletinBoard {
+public class ResponseUpdateForm {
 
-    @NotNull
     private int sequence;
 
-    @NotBlank(message = "메뉴명을 입력해주세요")
     private String name;
 
-    @NotNull
     private String description;
 
-    @NotNull
     private String writeAuth;
 
-    @NotNull
     private String readAuth;
 
-    @NotNull
     private String commentAuth;
 
-    @NotNull
     private boolean useFavorite;
 
 }

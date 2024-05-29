@@ -1,7 +1,7 @@
 package CloneCoding.NaverCafe.domain.cafe.service;
 
-import CloneCoding.NaverCafe.domain.bulletinBoard.BulletinBoard;
-import CloneCoding.NaverCafe.domain.bulletinBoard.repository.BulletinBoardRepository;
+import CloneCoding.NaverCafe.domain.menu.normal.integrate.Integrate;
+import CloneCoding.NaverCafe.domain.menu.normal.integrate.repository.IntegrateRepository;
 import CloneCoding.NaverCafe.domain.cafe.Cafe;
 import CloneCoding.NaverCafe.domain.cafe.dto.RequestCreateCafe;
 import CloneCoding.NaverCafe.domain.cafe.dto.ResponseCreateForm;
@@ -29,7 +29,7 @@ public class CafeServiceImpl implements CafeService {
     private final MemberRepository memberRepository;
     private final KeywordRepository keywordRepository;
     private final CafeMemberRepository cafeMemberRepository;
-    private final BulletinBoardRepository bulletinBoardRepository;
+    private final IntegrateRepository integrateRepository;
     private final AesUtil aesUtil;
 
     @Override
@@ -52,12 +52,12 @@ public class CafeServiceImpl implements CafeService {
                 member.getGender(), member.getBirthday(), cafe
         );
 
-        BulletinBoard basicBulletinBoard = BulletinBoard.createBasicBulletinBoard(cafe);
+        Integrate basicIntegrate = Integrate.createDefaultIntegrate(cafe);
 
         cafeRepository.save(cafe);
         keywordRepository.saveAll(keywords);
         cafeMemberRepository.save(cafeManager);
-        bulletinBoardRepository.save(basicBulletinBoard);
+        integrateRepository.save(basicIntegrate);
 
         return CREATE_CAFE_COMPLETE.getMessage();
 
