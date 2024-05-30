@@ -29,5 +29,6 @@
    - [회원정보 수정](https://development-diary-for-me.tistory.com/14)
    - [회원 탈퇴](https://development-diary-for-me.tistory.com/15)
    - [카페 생성시 기본 게시판](https://development-diary-for-me.tistory.com/16)
-   - [일반 게시판 추가](https://development-diary-for-me.tistory.com/17)
-   - [일반 게시판 수정](https://development-diary-for-me.tistory.com/18)
+   - [통합게시판 추가](https://development-diary-for-me.tistory.com/17)
+   - [통합게시판 수정](https://development-diary-for-me.tistory.com/18)
+   - [(통합게시판) 게시글 작성](https://development-diary-for-me.tistory.com/19)

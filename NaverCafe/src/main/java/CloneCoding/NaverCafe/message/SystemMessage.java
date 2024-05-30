@@ -36,6 +36,8 @@ public enum SystemMessage {
     DELETE_CAFE_MEMBER_COMPLETE("카페 탈퇴를 완료하였습니다."),
 
     SUCCESSFULLY_REFLECT("성공적으로 반영되었습니다."),
+
+    WRITE_COMPLETE("게시글 등록이 완료되었습니다."),
     ;
 
     private final String message;

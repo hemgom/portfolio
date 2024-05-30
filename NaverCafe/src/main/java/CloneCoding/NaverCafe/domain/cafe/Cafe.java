@@ -5,6 +5,7 @@ import CloneCoding.NaverCafe.domain.cafe.dto.RequestCreateCafe;
 import CloneCoding.NaverCafe.domain.cafe.enums.HowToJoin;
 import CloneCoding.NaverCafe.domain.cafeMember.CafeMember;
 import CloneCoding.NaverCafe.domain.keyword.Keyword;
+import CloneCoding.NaverCafe.domain.article.normal.Normal;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -61,6 +62,9 @@ public class Cafe {
 
     @OneToMany(mappedBy = "cafeId", fetch = FetchType.LAZY)
     private List<Integrate> integrates = new ArrayList<>();
+
+    @OneToMany(mappedBy = "cafeId", fetch = FetchType.LAZY)
+    private List<Normal> normals = new ArrayList<>();
 
     public static Cafe createCafe(RequestCreateCafe.CafeInfo cafeInfo) {
 
