@@ -1,12 +1,16 @@
 package CloneCoding.NaverCafe.domain.article.normal.service;
 
-import CloneCoding.NaverCafe.domain.article.normal.dto.RequestWriteNormal;
-import CloneCoding.NaverCafe.domain.article.normal.dto.ResponseWriteFormNormal;
+import CloneCoding.NaverCafe.domain.article.normal.dto.RequestPostNormal;
+import CloneCoding.NaverCafe.domain.article.normal.dto.ResponseNormalForm;
 
 public interface NormalService {
 
-    ResponseWriteFormNormal createWriteForm(String url, String token);
+    ResponseNormalForm createWriteForm(String url, String token);
 
-    String createNormal(RequestWriteNormal request, String url, String token);
+    String createNormal(RequestPostNormal request, String url, String token);
+
+    ResponseNormalForm createUpdateForm(String url, Long id, String token);
+
+    String updateNormal(String url, Long id, RequestPostNormal request, String token);
 
 }

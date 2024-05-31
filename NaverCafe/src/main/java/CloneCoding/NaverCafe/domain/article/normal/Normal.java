@@ -1,6 +1,6 @@
 package CloneCoding.NaverCafe.domain.article.normal;
 
-import CloneCoding.NaverCafe.domain.article.normal.dto.RequestWriteNormal;
+import CloneCoding.NaverCafe.domain.article.normal.dto.RequestPostNormal;
 import CloneCoding.NaverCafe.domain.cafe.Cafe;
 import CloneCoding.NaverCafe.domain.cafeMember.CafeMember;
 import jakarta.persistence.*;
@@ -62,7 +62,7 @@ public class Normal {
     @JoinColumn(name = "CAFE_ID")
     private Cafe cafeId;
 
-    public static Normal create(RequestWriteNormal request, CafeMember cafeMember) {
+    public static Normal create(RequestPostNormal request, CafeMember cafeMember) {
 
         LocalDateTime now = LocalDateTime.now();
 
@@ -78,6 +78,15 @@ public class Normal {
                 .createAt(now)
                 .cafeId(cafeMember.getCafeId())
                 .build();
+    }
+
+    public void update(RequestPostNormal request) {
+        this.menuId = request.getMenuId();
+        this.titleHeader = request.getTitleHeader();
+        this.title = request.getTitle();
+        this.body = request.getBody();
+        this.notice = request.isNotice();
+        this.allowComment = request.isAllowComment();
     }
 
 }

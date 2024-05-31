@@ -11,7 +11,7 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class RequestWriteNormal {
+public class RequestPostNormal {
 
     @NotNull
     private Long menuId;
