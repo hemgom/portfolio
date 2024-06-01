@@ -3,6 +3,7 @@ package CloneCoding.NaverCafe.domain.article.normal.service;
 import CloneCoding.NaverCafe.domain.article.normal.Normal;
 import CloneCoding.NaverCafe.domain.article.normal.dto.RequestPostNormal;
 import CloneCoding.NaverCafe.domain.article.normal.dto.ResponseNormalForm;
+import CloneCoding.NaverCafe.domain.article.normal.dto.ResponseReadNormal;
 import CloneCoding.NaverCafe.domain.article.normal.repository.NormalRepository;
 import CloneCoding.NaverCafe.domain.cafe.Cafe;
 import CloneCoding.NaverCafe.domain.cafe.repository.CafeRepository;
@@ -13,9 +14,13 @@ import CloneCoding.NaverCafe.domain.menu.normal.integrate.repository.IntegrateRe
 import CloneCoding.NaverCafe.security.AesUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.NoSuchElementException;
 
+import static CloneCoding.NaverCafe.domain.article.normal.enums.BasicData.DEFAULT_ARTICLE_URL;
+import static CloneCoding.NaverCafe.domain.article.normal.enums.BasicData.LEAVE_COMMENT;
+import static CloneCoding.NaverCafe.domain.cafeMember.enums.CafeMemberPosition.changeNameToPosition;
 import static CloneCoding.NaverCafe.message.SystemMessage.WRITE_COMPLETE;
 
 @Service
@@ -83,6 +88,52 @@ public class NormalServiceImpl implements NormalService {
 
         return WRITE_COMPLETE.getMessage();
 
+    }
+
+    @Override
+    @Transactional
+    public ResponseReadNormal readNormal(String url, Long id, String token) {
+
+        CafeMember reader = checkAuth(url, token);
+
+        Normal article = normalRepository.findByIdWithLock(id)
+                .orElseThrow(() -> new NoSuchElementException("게시글 정보를 찾을 수 없습니다."));
+
+        Integrate menu = integrateRepository.findById(article.getMenuId())
+                .orElseThrow(() -> new NoSuchElementException("게시판 정보를 찾을 수 없습니다."));
+
+        CafeMember writer = cafeMemberRepository.findByAccountId(article.getCafeId(), article.getAccountId());
+
+        article.addViewCount();
+
+        // 동시성 문제 테스트를 위해 필요한 딜레이
+        try {
+            Thread.sleep(5000L);
+        } catch (Exception e) {
+            throw new RuntimeException("기다리는 중");
+        }
+
+        Normal updateNormal = normalRepository.save(article);
+
+        return ResponseReadNormal.builder()
+                .menuId(menu.getId())
+                .menuName(menu.getName())
+                .title("[" + article.getTitleHeader() + "] " + article.getTitle())
+                .profileImage(writer.getProfileImage())
+                .accountId(article.getAccountId())
+                .nickname(article.getNickname())
+                .position(changeNameToPosition(writer.getPosition()))
+                .createAt(article.getCreateAt())
+                .viewCount(updateNormal.getViewCount())
+                .commentCount(article.getCommentCount())
+                .articleUrl(DEFAULT_ARTICLE_URL.getValue() +
+                        "/" + article.getCafeId().getUrl() +
+                        "/" + article.getId())
+                .body(article.getBody())
+                .favoriteCount(article.getFavoriteCount())
+                .commentNickname(reader.getNickname())
+                .defaultComment(LEAVE_COMMENT.getValue())
+                .build();
     }
 
     private CafeMember checkAuth(String url, String token) {

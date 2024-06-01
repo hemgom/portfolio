@@ -89,4 +89,8 @@ public class Normal {
         this.allowComment = request.isAllowComment();
     }
 
+    public void addViewCount() {
+        this.viewCount++;
+    }
+
 }

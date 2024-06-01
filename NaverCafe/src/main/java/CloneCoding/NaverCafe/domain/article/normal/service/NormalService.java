@@ -2,6 +2,7 @@ package CloneCoding.NaverCafe.domain.article.normal.service;
 
 import CloneCoding.NaverCafe.domain.article.normal.dto.RequestPostNormal;
 import CloneCoding.NaverCafe.domain.article.normal.dto.ResponseNormalForm;
+import CloneCoding.NaverCafe.domain.article.normal.dto.ResponseReadNormal;
 
 public interface NormalService {
 
@@ -12,5 +13,7 @@ public interface NormalService {
     ResponseNormalForm createUpdateForm(String url, Long id, String token);
 
     String updateNormal(String url, Long id, RequestPostNormal request, String token);
+
+    ResponseReadNormal readNormal(String url, Long id, String token);
 
 }

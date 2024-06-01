@@ -13,6 +13,8 @@ public enum BasicData {
     TITLE("제목을 입력해 주세요."),
     BODY("내용을 입력하세요."),
     TAG("# 태그를 입력해 주세요. (최대 10개)"),
+    DEFAULT_ARTICLE_URL("https://cafe.naver.com"),
+    LEAVE_COMMENT("댓글을 남겨보세요."),
     ;
 
     private final String value;

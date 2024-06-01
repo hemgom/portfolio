@@ -2,6 +2,7 @@ package CloneCoding.NaverCafe.domain.article.normal.controller;
 
 import CloneCoding.NaverCafe.domain.article.normal.dto.RequestPostNormal;
 import CloneCoding.NaverCafe.domain.article.normal.dto.ResponseNormalForm;
+import CloneCoding.NaverCafe.domain.article.normal.dto.ResponseReadNormal;
 import CloneCoding.NaverCafe.domain.article.normal.service.NormalService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -46,6 +47,14 @@ public class NormalController {
                                 @RequestHeader("Authorization") String token) {
         log.info("게시글 수정 요청");
         return normalService.updateNormal(url, id, request, token);
+    }
+
+    @GetMapping("/read/{normal_id}")
+    public ResponseReadNormal readArticle(@PathVariable("cafe_url") String url,
+                                          @PathVariable("normal_id") Long id,
+                                          @RequestHeader("Authorization") String token) {
+        log.info("게시글 읽기 요청");
+        return normalService.readNormal(url, id, token);
     }
 
 }
