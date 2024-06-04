@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Builder
@@ -42,5 +43,7 @@ public class ResponseReadNormal {
     private String commentNickname;
 
     private String defaultComment;
+
+    private List<String> tags;
 
 }

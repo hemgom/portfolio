@@ -4,6 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static CloneCoding.NaverCafe.domain.article.normal.enums.BasicData.*;
 
 @Getter
@@ -30,6 +33,8 @@ public class ResponseNormalForm {
     private final String body;
 
     private final String tag;
+
+    private List<String> tags = new ArrayList<>();
 
     private final boolean notice;
 

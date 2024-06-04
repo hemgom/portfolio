@@ -34,3 +34,5 @@
    - [(통합게시판) 게시글 작성](https://development-diary-for-me.tistory.com/19)
    - [(통합게시판) 게시글 수정](https://development-diary-for-me.tistory.com/20)
    - [(통합게시판) 게시글 읽기](https://development-diary-for-me.tistory.com/21)
+   - [(통합게시판) 게시글 삭제](https://development-diary-for-me.tistory.com/22)
+   - [(통합게시판) 태그 추가, 수정(삭제)](https://development-diary-for-me.tistory.com/23)

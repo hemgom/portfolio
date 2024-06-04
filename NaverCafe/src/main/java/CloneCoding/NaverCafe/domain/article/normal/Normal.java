@@ -3,10 +3,13 @@ package CloneCoding.NaverCafe.domain.article.normal;
 import CloneCoding.NaverCafe.domain.article.normal.dto.RequestPostNormal;
 import CloneCoding.NaverCafe.domain.cafe.Cafe;
 import CloneCoding.NaverCafe.domain.cafeMember.CafeMember;
+import CloneCoding.NaverCafe.domain.tag.Tag;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "NORMAL_ARTICLE")
@@ -61,6 +64,9 @@ public class Normal {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CAFE_ID")
     private Cafe cafeId;
+
+    @OneToMany(mappedBy = "normalId", fetch = FetchType.LAZY)
+    private List<Tag> tags = new ArrayList<>();
 
     public static Normal create(RequestPostNormal request, CafeMember cafeMember) {
 

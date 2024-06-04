@@ -11,11 +11,15 @@ import CloneCoding.NaverCafe.domain.cafeMember.CafeMember;
 import CloneCoding.NaverCafe.domain.cafeMember.repository.CafeMemberRepository;
 import CloneCoding.NaverCafe.domain.menu.normal.integrate.Integrate;
 import CloneCoding.NaverCafe.domain.menu.normal.integrate.repository.IntegrateRepository;
+import CloneCoding.NaverCafe.domain.tag.Tag;
+import CloneCoding.NaverCafe.domain.tag.repository.TagRepository;
 import CloneCoding.NaverCafe.security.AesUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 import static CloneCoding.NaverCafe.domain.article.normal.enums.BasicData.DEFAULT_ARTICLE_URL;
@@ -32,6 +36,7 @@ public class NormalServiceImpl implements NormalService {
     private final CafeRepository cafeRepository;
     private final CafeMemberRepository cafeMemberRepository;
     private final IntegrateRepository integrateRepository;
+    private final TagRepository tagRepository;
     private final AesUtil aesUtil;
 
     @Override
@@ -47,7 +52,10 @@ public class NormalServiceImpl implements NormalService {
 
         Normal normal = Normal.create(request, cafeMember);
 
+        List<Tag> tags = createTags(request.getTags(), normal);
+
         normalRepository.save(normal);
+        tagRepository.saveAll(tags);
 
         return WRITE_COMPLETE.getMessage();
 
@@ -69,7 +77,7 @@ public class NormalServiceImpl implements NormalService {
                 .titleHeader(article.getTitleHeader())
                 .title(article.getTitle())
                 .body(article.getBody())
-                .tag("")
+                .tags(hasTags(article))
                 .notice(article.isNotice())
                 .allowComment(article.isAllowComment())
                 .build();
@@ -85,6 +93,7 @@ public class NormalServiceImpl implements NormalService {
 
         article.update(request);
 
+        updateTags(request.getTags(), article);
         normalRepository.save(article);
 
         return WRITE_COMPLETE.getMessage();
@@ -134,6 +143,7 @@ public class NormalServiceImpl implements NormalService {
                 .favoriteCount(article.getFavoriteCount())
                 .commentNickname(reader.getNickname())
                 .defaultComment(LEAVE_COMMENT.getValue())
+                .tags(hasTags(updateNormal))
                 .build();
     }
 
@@ -160,6 +170,53 @@ public class NormalServiceImpl implements NormalService {
         String accountId = aesUtil.aesDecode(token);
 
         return cafeMemberRepository.findByAccountId(cafe, accountId);
+    }
+
+    private List<Tag> createTags(List<String> tags, Normal normal) {
+        List<Tag> result = new ArrayList<>();
+
+        if (!tags.isEmpty()) {
+            result = Tag.createTags(tags, normal);
+        }
+
+        return result;
+    }
+
+    private void updateTags(List<String> tags, Normal normal) {
+
+        List<String> delTags = hasTags(normal);
+        List<String> addTags = new ArrayList<>();
+
+        for (String t : tags) {
+            if (delTags.contains(t)) {
+                delTags.remove(t);
+            } else {
+                addTags.add(t);
+            }
+        }
+
+        if (!addTags.isEmpty()) {
+            List<Tag> newTags = createTags(addTags, normal);
+            tagRepository.saveAll(newTags);
+        }
+
+        if (!delTags.isEmpty()) {
+            for (String n : delTags) {
+                Tag findTag = tagRepository.findByNameAndArticle(n, normal);
+                tagRepository.delete(findTag);
+            }
+        }
+
+    }
+
+    private List<String> hasTags(Normal normal) {
+        List<String> result = new ArrayList<>();
+
+        for (Tag t : normal.getTags()) {
+            result.add(t.getTagName());
+        }
+
+        return result;
     }
 
 }
