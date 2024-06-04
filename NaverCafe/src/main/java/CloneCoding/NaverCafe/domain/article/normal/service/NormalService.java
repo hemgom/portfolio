@@ -16,4 +16,6 @@ public interface NormalService {
 
     ResponseReadNormal readNormal(String url, Long id, String token);
 
+    String delNormal(String url, Long id, String token);
+
 }

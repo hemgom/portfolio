@@ -57,4 +57,12 @@ public class NormalController {
         return normalService.readNormal(url, id, token);
     }
 
+    @DeleteMapping("/delete/{normal_id}")
+    public String delArticle(@PathVariable("cafe_url") String url,
+                             @PathVariable("normal_id") Long id,
+                             @RequestHeader("Authorization") String token) {
+        log.info("게시글 삭제 요청");
+        return normalService.delNormal(url, id, token);
+    }
+
 }

@@ -21,6 +21,7 @@ import java.util.NoSuchElementException;
 import static CloneCoding.NaverCafe.domain.article.normal.enums.BasicData.DEFAULT_ARTICLE_URL;
 import static CloneCoding.NaverCafe.domain.article.normal.enums.BasicData.LEAVE_COMMENT;
 import static CloneCoding.NaverCafe.domain.cafeMember.enums.CafeMemberPosition.changeNameToPosition;
+import static CloneCoding.NaverCafe.message.SystemMessage.DELETE_ARTICLE_COMPLETE;
 import static CloneCoding.NaverCafe.message.SystemMessage.WRITE_COMPLETE;
 
 @Service
@@ -134,6 +135,24 @@ public class NormalServiceImpl implements NormalService {
                 .commentNickname(reader.getNickname())
                 .defaultComment(LEAVE_COMMENT.getValue())
                 .build();
+    }
+
+    @Override
+    public String delNormal(String url, Long id, String token) {
+
+        CafeMember user = checkAuth(url, token);
+
+        Normal article = normalRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("게시글 정보를 찾을 수 없습니다."));
+
+        if (!user.getAccountId().equals(article.getAccountId())) {
+            throw new RuntimeException("작성자일 경우 해당 게시글을 삭제할 수 있습니다.");
+        }
+
+        normalRepository.delete(article);
+
+        return DELETE_ARTICLE_COMPLETE.getMessage();
+
     }
 
     private CafeMember checkAuth(String url, String token) {

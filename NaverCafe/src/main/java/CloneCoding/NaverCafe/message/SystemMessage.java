@@ -38,6 +38,8 @@ public enum SystemMessage {
     SUCCESSFULLY_REFLECT("성공적으로 반영되었습니다."),
 
     WRITE_COMPLETE("게시글 등록이 완료되었습니다."),
+
+    DELETE_ARTICLE_COMPLETE("게시글 삭제가 완료 되었습니다."),
     ;
 
     private final String message;
