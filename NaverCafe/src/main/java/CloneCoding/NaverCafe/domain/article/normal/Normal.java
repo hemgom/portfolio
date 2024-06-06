@@ -3,6 +3,7 @@ package CloneCoding.NaverCafe.domain.article.normal;
 import CloneCoding.NaverCafe.domain.article.normal.dto.RequestPostNormal;
 import CloneCoding.NaverCafe.domain.cafe.Cafe;
 import CloneCoding.NaverCafe.domain.cafeMember.CafeMember;
+import CloneCoding.NaverCafe.domain.favorite.Favorite;
 import CloneCoding.NaverCafe.domain.tag.Tag;
 import jakarta.persistence.*;
 import lombok.*;
@@ -68,6 +69,9 @@ public class Normal {
     @OneToMany(mappedBy = "normalId", fetch = FetchType.LAZY)
     private List<Tag> tags = new ArrayList<>();
 
+    @OneToMany(mappedBy = "normalId", fetch = FetchType.LAZY)
+    private List<Favorite> favorites = new ArrayList<>();
+
     public static Normal create(RequestPostNormal request, CafeMember cafeMember) {
 
         LocalDateTime now = LocalDateTime.now();
@@ -97,6 +101,14 @@ public class Normal {
 
     public void addViewCount() {
         this.viewCount++;
+    }
+
+    public void addFavoriteCount() {
+        this.favoriteCount++;
+    }
+
+    public void subFavoriteCount() {
+        this.favoriteCount--;
     }
 
 }

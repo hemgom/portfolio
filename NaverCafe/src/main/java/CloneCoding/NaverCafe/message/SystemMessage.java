@@ -40,6 +40,10 @@ public enum SystemMessage {
     WRITE_COMPLETE("게시글 등록이 완료되었습니다."),
 
     DELETE_ARTICLE_COMPLETE("게시글 삭제가 완료 되었습니다."),
+
+    ADD_FAVORITE_COMPLETE("게시글을 좋아요로 등록했습니다."),
+
+    SUB_FAVORITE_COMPLETE("게시글 좋아요를 취소했습니다."),
     ;
 
     private final String message;

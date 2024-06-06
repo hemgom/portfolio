@@ -36,3 +36,4 @@
    - [(통합게시판) 게시글 읽기](https://development-diary-for-me.tistory.com/21)
    - [(통합게시판) 게시글 삭제](https://development-diary-for-me.tistory.com/22)
    - [(통합게시판) 태그 추가, 수정(삭제)](https://development-diary-for-me.tistory.com/23)
+   - [게시글 '좋아요' 등록, 취소](https://development-diary-for-me.tistory.com/24)
