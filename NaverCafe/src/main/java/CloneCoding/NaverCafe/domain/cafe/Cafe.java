@@ -1,5 +1,6 @@
 package CloneCoding.NaverCafe.domain.cafe;
 
+import CloneCoding.NaverCafe.domain.comment.Comment;
 import CloneCoding.NaverCafe.domain.menu.normal.integrate.Integrate;
 import CloneCoding.NaverCafe.domain.cafe.dto.RequestCreateCafe;
 import CloneCoding.NaverCafe.domain.cafe.enums.HowToJoin;
@@ -65,6 +66,9 @@ public class Cafe {
 
     @OneToMany(mappedBy = "cafeId", fetch = FetchType.LAZY)
     private List<Normal> normals = new ArrayList<>();
+
+    @OneToMany(mappedBy = "cafeId", fetch = FetchType.LAZY)
+    private List<Comment> comments = new ArrayList<>();
 
     public static Cafe createCafe(RequestCreateCafe.CafeInfo cafeInfo) {
 

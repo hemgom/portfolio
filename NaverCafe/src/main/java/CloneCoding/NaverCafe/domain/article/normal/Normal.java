@@ -111,4 +111,8 @@ public class Normal {
         this.favoriteCount--;
     }
 
+    public void addCommentCount() { this.commentCount++; }
+
+    public void subCommentCount() { this.commentCount--; }
+
 }

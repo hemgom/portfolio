@@ -44,6 +44,8 @@ public enum SystemMessage {
     ADD_FAVORITE_COMPLETE("게시글을 좋아요로 등록했습니다."),
 
     SUB_FAVORITE_COMPLETE("게시글 좋아요를 취소했습니다."),
+
+    WRITE_COMMENT_COMPLETE("댓글 작성을 완료하였습니다."),
     ;
 
     private final String message;
