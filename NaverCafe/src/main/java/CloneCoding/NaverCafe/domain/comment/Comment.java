@@ -66,4 +66,12 @@ public class Comment {
                 .build();
     }
 
+    public void setMainId(Long commentId) {
+        this.replyMain = commentId;
+    }
+
+    public void setTargetId(Long commentId) {
+        this.replyTarget = commentId;
+    }
+
 }
