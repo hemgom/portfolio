@@ -58,6 +58,10 @@ public class Normal {
     @Builder.Default
     private int commentCount = 0;
 
+    @Column(name = "REPLY_COUNT")
+    @Builder.Default
+    private int replyCount = 0;
+
     @Column(name = "FAVORITE_COUNT")
     @Builder.Default
     private int favoriteCount = 0;
@@ -114,5 +118,9 @@ public class Normal {
     public void addCommentCount() { this.commentCount++; }
 
     public void subCommentCount() { this.commentCount--; }
+
+    public void addReplyCount() { this.replyCount++; }
+
+    public void subReplyCount() { this.replyCount--; }
 
 }

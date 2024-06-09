@@ -7,15 +7,15 @@ import CloneCoding.NaverCafe.domain.cafe.repository.CafeRepository;
 import CloneCoding.NaverCafe.domain.cafeMember.CafeMember;
 import CloneCoding.NaverCafe.domain.cafeMember.repository.CafeMemberRepository;
 import CloneCoding.NaverCafe.domain.comment.Comment;
-import CloneCoding.NaverCafe.domain.comment.dto.RequestWriteComment;
-import CloneCoding.NaverCafe.domain.comment.dto.ResponseReplyForm;
-import CloneCoding.NaverCafe.domain.comment.dto.ResponseWriteForm;
+import CloneCoding.NaverCafe.domain.comment.dto.*;
 import CloneCoding.NaverCafe.domain.comment.repository.CommentRepository;
 import CloneCoding.NaverCafe.security.AesUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 import static CloneCoding.NaverCafe.message.SystemMessage.WRITE_COMMENT_COMPLETE;
@@ -48,8 +48,9 @@ public class CommentServiceImpl implements CommentService {
         Normal article = normalRepository.findByIdWithLock(id)
                 .orElseThrow(() -> new NoSuchElementException("게시글 정보를 찾을 수 없습니다."));
 
-        Comment comment = Comment.create(user, article.getId(), request);
         article.addCommentCount();
+
+        Comment comment = Comment.create(user, article.getId(), article.getCommentCount(), request);
 
         commentRepository.save(comment);
         normalRepository.save(article);
@@ -78,21 +79,41 @@ public class CommentServiceImpl implements CommentService {
         CafeMember user = checkCafeMember(url, token);
         Normal article = normalRepository.findByIdWithLock(normalId)
                 .orElseThrow(() -> new NoSuchElementException("게시글 정보를 찾을 수 없습니다."));
-
-        Comment reply = Comment.create(user, article.getId(), request);
-
-        Comment replyTarget = commentRepository.findById(commentId)
+        Comment targetComment = commentRepository.findById(commentId)
                 .orElseThrow(() -> new NoSuchElementException("댓글 정보를 찾을 수 없습니다."));
 
-        reply.setMainId(checkReplyMain(replyTarget));
-        reply.setTargetId(replyTarget.getId());
+        Comment reply = Comment.createReply(user, article.getId(), targetComment.getCommentGroup(),
+                targetComment.getAccountId(), targetComment.getNickname(), request);
 
-        article.addCommentCount();
+        article.addReplyCount();
 
         commentRepository.save(reply);
         normalRepository.save(article);
 
         return WRITE_COMMENT_COMPLETE.getMessage();
+    }
+
+    @Override
+    public ResponseReadComments createCommentList(String cafeUrl, Long articleId, String token) {
+
+        checkCafeMember(cafeUrl, token);
+        List<Comment> comments = commentRepository.findByArticleId(articleId);
+
+        List<ResponseReadComment> result = new ArrayList<>();
+
+        for (Comment c : comments) {
+            result.add(ResponseReadComment.builder()
+                    .profileImage(c.getProfileImage())
+                    .nickname(c.getNickname())
+                    .accountId(c.getAccountId())
+                    .targetAccountId(c.getTargetAccountId())
+                    .targetNickname(c.getTargetNickname())
+                    .body(c.getBody())
+                    .updateAt(c.getUpdateAt())
+                    .build());
+        }
+
+        return new ResponseReadComments(result);
     }
 
     private CafeMember checkCafeMember(String url, String token) {
@@ -101,19 +122,6 @@ public class CommentServiceImpl implements CommentService {
         Cafe findCafe = cafeRepository.findByUrl(url);
 
         return cafeMemberRepository.findByAccountId(findCafe, accountId);
-    }
-
-    private Long checkReplyMain(Comment replyTarget) {
-
-        Long replyMainId = 0L;
-
-        if (replyTarget.getReplyMain() == 0L) {
-            replyMainId = replyTarget.getId();
-        } else {
-            replyMainId = replyTarget.getReplyMain();
-        }
-
-        return replyMainId;
     }
 
 }

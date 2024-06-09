@@ -41,19 +41,23 @@ public class Comment {
     @Column(name = "UPDATE_AT")
     private LocalDateTime updateAt;
 
-    @Column(name = "REPLY_MAIN")
-    @Builder.Default
-    private Long replyMain = 0L;
+    @Column(name = "COMMENT_GROUP")
+    private int commentGroup;
 
-    @Column(name = "REPLY_TARGET")
+    @Column(name = "TARGET_ACCOUNT_ID")
     @Builder.Default
-    private Long replyTarget = 0L;
+    private String targetAccountId = "";
+
+    @Column(name = "TARGET_NICKNAME")
+    @Builder.Default
+    private String targetNickname = "";
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CAFE_ID")
     private Cafe cafeId;
 
-    public static Comment create(CafeMember cafeMember, Long menuId, RequestWriteComment request) {
+    public static Comment create(CafeMember cafeMember, Long menuId, int commentGroup,
+                                 RequestWriteComment request) {
         return Comment.builder()
                 .menuId(menuId)
                 .profileImage(cafeMember.getProfileImage())
@@ -62,16 +66,26 @@ public class Comment {
                 .body(request.getBody())
                 .createAt(LocalDateTime.now())
                 .updateAt(LocalDateTime.now())
+                .commentGroup(commentGroup)
                 .cafeId(cafeMember.getCafeId())
                 .build();
     }
 
-    public void setMainId(Long commentId) {
-        this.replyMain = commentId;
-    }
-
-    public void setTargetId(Long commentId) {
-        this.replyTarget = commentId;
+    public static Comment createReply(CafeMember cafeMember, Long menuId, int commentGroup,
+                                 String targetAccountId, String targetNickname, RequestWriteComment request) {
+        return Comment.builder()
+                .menuId(menuId)
+                .profileImage(cafeMember.getProfileImage())
+                .accountId(cafeMember.getAccountId())
+                .nickname(cafeMember.getNickname())
+                .body(request.getBody())
+                .createAt(LocalDateTime.now())
+                .updateAt(LocalDateTime.now())
+                .commentGroup(commentGroup)
+                .targetAccountId(targetAccountId)
+                .targetNickname(targetNickname)
+                .cafeId(cafeMember.getCafeId())
+                .build();
     }
 
 }

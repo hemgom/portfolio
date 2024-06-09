@@ -1,6 +1,7 @@
 package CloneCoding.NaverCafe.domain.comment.controller;
 
 import CloneCoding.NaverCafe.domain.comment.dto.RequestWriteComment;
+import CloneCoding.NaverCafe.domain.comment.dto.ResponseReadComments;
 import CloneCoding.NaverCafe.domain.comment.dto.ResponseReplyForm;
 import CloneCoding.NaverCafe.domain.comment.dto.ResponseWriteForm;
 import CloneCoding.NaverCafe.domain.comment.service.CommentService;
@@ -49,6 +50,14 @@ public class CommentController {
                              @RequestHeader("Authorization") String token) {
         log.info("답글 작성 요청");
         return commentService.createReply(url, articleId, commentId, request, token);
+    }
+
+    @GetMapping("{normal_id}/comments")
+    public ResponseReadComments readComments(@PathVariable("cafe_url") String cafeUrl,
+                                             @PathVariable("normal_id") Long articleId,
+                                             @RequestHeader("Authorization") String token) {
+        log.info("댓글 목록 요청");
+        return commentService.createCommentList(cafeUrl, articleId, token);
     }
 
 }

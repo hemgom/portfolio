@@ -135,7 +135,7 @@ public class NormalServiceImpl implements NormalService {
                 .position(changeNameToPosition(writer.getPosition()))
                 .createAt(article.getCreateAt())
                 .viewCount(updateNormal.getViewCount())
-                .commentCount(article.getCommentCount())
+                .commentCount(article.getCommentCount() + article.getReplyCount())
                 .articleUrl(DEFAULT_ARTICLE_URL.getValue() +
                         "/" + article.getCafeId().getUrl() +
                         "/" + article.getId())
