@@ -88,4 +88,9 @@ public class Comment {
                 .build();
     }
 
+    public void update(String body, LocalDateTime updateAt) {
+        this.body = body;
+        this.updateAt = updateAt;
+    }
+
 }

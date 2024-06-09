@@ -17,4 +17,6 @@ public interface CommentService {
 
     ResponseReadComments createCommentList(String cafeUrl, Long articleId, String token);
 
+    String updateComment(String url, Long commentId, RequestWriteComment request, String token);
+
 }

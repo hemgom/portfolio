@@ -52,12 +52,21 @@ public class CommentController {
         return commentService.createReply(url, articleId, commentId, request, token);
     }
 
-    @GetMapping("{normal_id}/comments")
+    @GetMapping("/{normal_id}/comments")
     public ResponseReadComments readComments(@PathVariable("cafe_url") String cafeUrl,
                                              @PathVariable("normal_id") Long articleId,
                                              @RequestHeader("Authorization") String token) {
         log.info("댓글 목록 요청");
         return commentService.createCommentList(cafeUrl, articleId, token);
+    }
+
+    @PutMapping("/comment/{comment_id}")
+    public String updateComment(@PathVariable("cafe_url") String cafeUrl,
+                                @PathVariable("comment_id") Long commentId,
+                                @RequestBody @Valid RequestWriteComment request,
+                                @RequestHeader("Authorization") String token) {
+        log.info("댓글(답글) 수정 요청");
+        return commentService.updateComment(cafeUrl, commentId, request, token);
     }
 
 }

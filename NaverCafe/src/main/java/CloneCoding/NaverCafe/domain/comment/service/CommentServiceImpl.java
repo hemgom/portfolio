@@ -14,10 +14,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import static CloneCoding.NaverCafe.message.SystemMessage.UPDATE_COMMENT_COMPLETE;
 import static CloneCoding.NaverCafe.message.SystemMessage.WRITE_COMMENT_COMPLETE;
 
 @Service
@@ -114,6 +116,21 @@ public class CommentServiceImpl implements CommentService {
         }
 
         return new ResponseReadComments(result);
+    }
+
+    @Override
+    public String updateComment(String cafeUrl, Long commentId, RequestWriteComment request,
+                                String token) {
+
+        checkCafeMember(cafeUrl, token);
+        Comment comment = commentRepository.findById(commentId)
+                .orElseThrow(() -> new NoSuchElementException("댓글 정보를 찾을 수 없습니다."));
+
+        comment.update(request.getBody(), LocalDateTime.now());
+
+        commentRepository.save(comment);
+
+        return UPDATE_COMMENT_COMPLETE.getMessage();
     }
 
     private CafeMember checkCafeMember(String url, String token) {

@@ -40,6 +40,6 @@
    - [댓글 작성](https://development-diary-for-me.tistory.com/25)
    - [답글 작성](https://development-diary-for-me.tistory.com/26)
    - [댓글 읽기](https://development-diary-for-me.tistory.com/27)
-   - [댓글 수정]()
+   - [댓글 수정](https://development-diary-for-me.tistory.com/28)
    - [댓글 삭제]()
    - [답글 삭제]()
