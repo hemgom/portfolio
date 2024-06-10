@@ -48,6 +48,8 @@ public enum SystemMessage {
     WRITE_COMMENT_COMPLETE("댓글 작성을 완료하였습니다."),
 
     UPDATE_COMMENT_COMPLETE("댓글 수정을 완료하였습니다."),
+
+    DELETE_COMMENT_COMPLETE("댓글 삭제를 완료하였습니다."),
     ;
 
     private final String message;

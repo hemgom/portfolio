@@ -19,8 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-import static CloneCoding.NaverCafe.message.SystemMessage.UPDATE_COMMENT_COMPLETE;
-import static CloneCoding.NaverCafe.message.SystemMessage.WRITE_COMMENT_COMPLETE;
+import static CloneCoding.NaverCafe.message.SystemMessage.*;
 
 @Service
 @RequiredArgsConstructor
@@ -50,9 +49,10 @@ public class CommentServiceImpl implements CommentService {
         Normal article = normalRepository.findByIdWithLock(id)
                 .orElseThrow(() -> new NoSuchElementException("게시글 정보를 찾을 수 없습니다."));
 
+        article.addGroupNum();
         article.addCommentCount();
 
-        Comment comment = Comment.create(user, article.getId(), article.getCommentCount(), request);
+        Comment comment = Comment.create(user, article.getId(), article.getGroupNum(), request);
 
         commentRepository.save(comment);
         normalRepository.save(article);
@@ -87,7 +87,7 @@ public class CommentServiceImpl implements CommentService {
         Comment reply = Comment.createReply(user, article.getId(), targetComment.getCommentGroup(),
                 targetComment.getAccountId(), targetComment.getNickname(), request);
 
-        article.addReplyCount();
+        article.addCommentCount();
 
         commentRepository.save(reply);
         normalRepository.save(article);
@@ -131,6 +131,24 @@ public class CommentServiceImpl implements CommentService {
         commentRepository.save(comment);
 
         return UPDATE_COMMENT_COMPLETE.getMessage();
+    }
+
+    @Transactional
+    @Override
+    public String delComment(String cafeUrl, Long normalId, Long commentId, String token) {
+
+        checkCafeMember(cafeUrl, token);
+        Normal article = normalRepository.findByIdWithLock(normalId)
+                .orElseThrow(() -> new NoSuchElementException("게시글 정보를 찾을 수 없습니다."));
+        Comment comment = commentRepository.findById(commentId)
+                .orElseThrow(() -> new NoSuchElementException("댓글 정보를 찾을 수 없습니다."));
+
+        article.subCommentCount();
+
+        commentRepository.delete(comment);
+        normalRepository.save(article);
+
+        return DELETE_COMMENT_COMPLETE.getMessage();
     }
 
     private CafeMember checkCafeMember(String url, String token) {

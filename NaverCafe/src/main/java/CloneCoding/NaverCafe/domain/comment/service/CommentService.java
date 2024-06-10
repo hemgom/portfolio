@@ -19,4 +19,6 @@ public interface CommentService {
 
     String updateComment(String url, Long commentId, RequestWriteComment request, String token);
 
+    String delComment(String cafeUrl, Long normalId, Long commentId, String token);
+
 }

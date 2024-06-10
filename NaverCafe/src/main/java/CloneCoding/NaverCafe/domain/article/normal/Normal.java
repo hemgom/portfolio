@@ -58,9 +58,9 @@ public class Normal {
     @Builder.Default
     private int commentCount = 0;
 
-    @Column(name = "REPLY_COUNT")
+    @Column(name = "GROUP_NUM")
     @Builder.Default
-    private int replyCount = 0;
+    private int groupNum = 0;
 
     @Column(name = "FAVORITE_COUNT")
     @Builder.Default
@@ -119,8 +119,6 @@ public class Normal {
 
     public void subCommentCount() { this.commentCount--; }
 
-    public void addReplyCount() { this.replyCount++; }
-
-    public void subReplyCount() { this.replyCount--; }
+    public void addGroupNum() { this.groupNum++; }
 
 }

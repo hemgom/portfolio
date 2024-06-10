@@ -69,4 +69,15 @@ public class CommentController {
         return commentService.updateComment(cafeUrl, commentId, request, token);
     }
 
+    @DeleteMapping("/{normal_id}/comment/{comment_id}")
+    public String delComment(@PathVariable("cafe_url") String cafeUrl,
+                             @PathVariable("normal_id") Long articleId,
+                             @PathVariable("comment_id") Long commentId,
+                             @RequestHeader("Authorization") String token) {
+        log.info("댓글 삭제 요청");
+        return commentService.delComment(cafeUrl, articleId, commentId, token);
+    }
+
+
+
 }

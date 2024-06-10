@@ -71,7 +71,7 @@ public class Comment {
                 .build();
     }
 
-    public static Comment createReply(CafeMember cafeMember, Long menuId, int commentGroup,
+    public static Comment createReply(CafeMember cafeMember, Long menuId, int groupNum,
                                  String targetAccountId, String targetNickname, RequestWriteComment request) {
         return Comment.builder()
                 .menuId(menuId)
@@ -81,7 +81,7 @@ public class Comment {
                 .body(request.getBody())
                 .createAt(LocalDateTime.now())
                 .updateAt(LocalDateTime.now())
-                .commentGroup(commentGroup)
+                .commentGroup(groupNum)
                 .targetAccountId(targetAccountId)
                 .targetNickname(targetNickname)
                 .cafeId(cafeMember.getCafeId())
