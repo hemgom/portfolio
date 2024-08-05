@@ -3,17 +3,19 @@
 <br/><br/><br/>
 
 ## 목차
-- 개발 환경
-- 사용 기술
-  - 백엔드
-  - 기타 주요 라이브러리
-- 핵심 키워드
-- ERD
-- 프로젝트 목적
-  - 네이버 카페 클론 코딩 프로젝트를 시작한 이유?
-- 핵심 기능
-- 프로젝트를 통해 느낀점
-- 프로젝트 관련 포스팅
+- [개발 환경](https://github.com/hemgom/portfolio/edit/main/navercafe/README.md#%EA%B0%9C%EB%B0%9C-%ED%99%98%EA%B2%BD)
+- [사용 기술](https://github.com/hemgom/portfolio/edit/main/navercafe/README.md#%EC%82%AC%EC%9A%A9-%EA%B8%B0%EC%88%A0)
+  - [백엔드](https://github.com/hemgom/portfolio/edit/main/navercafe/README.md#%EB%B0%B1%EC%97%94%EB%93%9C)
+  - [기타 주요 라이브러리](https://github.com/hemgom/portfolio/edit/main/navercafe/README.md#%EA%B8%B0%ED%83%80-%EC%A3%BC%EC%9A%94-%EB%9D%BC%EC%9D%B4%EB%B8%8C%EB%9F%AC%EB%A6%AC)
+- [핵심 키워드](https://github.com/hemgom/portfolio/edit/main/navercafe/README.md#%ED%95%B5%EC%8B%AC-%ED%82%A4%EC%9B%8C%EB%93%9C)
+- [ERD](https://github.com/hemgom/portfolio/edit/main/navercafe/README.md#erd)
+- [프로젝트 목적](https://github.com/hemgom/portfolio/edit/main/navercafe/README.md#%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EB%AA%A9%EC%A0%81)
+  - [네이버카페-클론 코딩 프로젝트 시작 계기](https://github.com/hemgom/portfolio/edit/main/navercafe/README.md#%EB%84%A4%EC%9D%B4%EB%B2%84%EC%B9%B4%ED%8E%98-%ED%81%B4%EB%A1%A0-%EC%BD%94%EB%94%A9-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EC%8B%9C%EC%9E%91-%EA%B3%84%EA%B8%B0)
+  - [프로젝트를 통해 하고 싶었던 것](https://github.com/hemgom/portfolio/edit/main/navercafe/README.md#%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%EB%A5%BC-%ED%86%B5%ED%95%B4-%ED%95%98%EA%B3%A0-%EC%8B%B6%EC%97%88%EB%8D%98-%EA%B2%83)
+- [서비스 분석](https://github.com/hemgom/portfolio/edit/main/navercafe/README.md#%EC%84%9C%EB%B9%84%EC%8A%A4-%EB%B6%84%EC%84%9D)
+- [구현 기능](https://github.com/hemgom/portfolio/edit/main/navercafe/README.md#%EA%B5%AC%ED%98%84-%EA%B8%B0%EB%8A%A5)
+- [프로젝트를 통해 느낀점](https://github.com/hemgom/portfolio/edit/main/navercafe/README.md#%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%EB%A5%BC-%ED%86%B5%ED%95%B4-%EB%8A%90%EB%82%80%EC%A0%90)
+- [프로젝트 관련 포스팅](https://github.com/hemgom/portfolio/edit/main/navercafe/README.md#%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EA%B4%80%EB%A0%A8-%ED%8F%AC%EC%8A%A4%ED%8C%85)
 <br/><br/>
 
 ## 개발 환경
@@ -35,8 +37,6 @@
    - Gradle
 #### DB
    - MySQL
-<br/>
-
 ### 기타 주요 라이브러리
 - Lombok
 - Json Web Token
@@ -58,8 +58,7 @@
 
 하지만 '클론 코딩' 이라는 개념을 알게되고 '내가 자주 사용해본 웹 사이트를 구현하면 어떨까?' 라는 생각을 하게 되었습니다.<br/>
 
-머리에 떠오른 다양한 웹 사이트들 중, 비교적 최근까지 사용했기에 서비스 분석을 더 상세히 할 수 있고, 어떠한 서비스들을 사용자들이 주로 사용하는지 파악하고 있는 '네이버카페' 를 선택하게 되었고, '네이버카페'가 제공하는 서비스를 하나하나 구현하게 되었습니다.
-<br/>
+머리에 떠오른 다양한 웹 사이트들 중, 비교적 최근까지 사용했기에 서비스 분석을 더 상세히 할 수 있고, 어떠한 서비스들을 사용자들이 주로 사용하는지 파악하고 있는 '네이버카페' 를 선택하게 되었고, '네이버카페'가 제공하는 서비스를 하나하나 구현하게 되었습니다.<br/>
 
 ### 프로젝트를 통해 하고 싶었던 것
 현재 서비스되고 있는 '네이버카페'에서 사용자에게 제공되는 서비스를 하나씩 다루어보며 그 서비스를 실제로 구현할 수 있는지 확인하고 싶었습니다.<br/>
@@ -69,7 +68,7 @@
 
 ## 서비스 분석
 네이버카페 서비스에 대한 분석을 통해 해당 서비스가 제공하는 기능에 대해 파악 및 정리 하였습니다.
-- [네이버카페 시스템 분석](https://development-diary-for-me.tistory.com/2)  
+- [네이버카페 시스템 분석](https://development-diary-for-me.tistory.com/2)
 <br/><br/>
 
 ## 구현 기능
@@ -82,8 +81,6 @@
    - [네이버 로그아웃](https://development-diary-for-me.tistory.com/8)
    - [네이버 회원 정보 수정](https://development-diary-for-me.tistory.com/9)
    - [네이버 회원 탈퇴](https://development-diary-for-me.tistory.com/10)
-<br/>
-
 ### 네이버카페
    - [카페 생성](https://development-diary-for-me.tistory.com/12)
    - [카페 회원 가입](https://development-diary-for-me.tistory.com/13)
@@ -110,7 +107,7 @@
 
 다시 시작한 프로그래밍은 즐거우면서도 망설여졌습니다. 하지만 막히는 부분이 있을 때마다 '이 부분만 해결하고 자야지'하며, 새벽까지 모니터 화면 앞에서 고민하고 있는 제 모습을 자각했을 때 도전하고 싶다는 마음을 확인 할 수 있었습니다.<br/>
 
-또한 아직 부족한 것이 너무 많아, 개발을 할 때 마다 새로 학습해야 할 내용이 계속해서 등장하지만 '힘들다, 지친다' 라는 생각보다는 '저걸 배우면 어떻게 써먹을 수 있을까?' 하는 생각을 하게 되었습니다.<br/>
+또한 아직 부족한 것이 너무 많아, 개발을 할 때 마다 새로 학습해야 할 내용이 계속해서 등장하지만 '힘들다, 지친다' 라는 생각보다는 '저걸 배우면 어떻게 써먹을 수 있을까?' 하는 생각을 하게 되었습니다.
 <br/><br/>
 
 ## 프로젝트 관련 포스팅
